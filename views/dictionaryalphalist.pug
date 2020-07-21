@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  main
+    section.mindset-dictionary-lettercategory
+      article.mindset-dictionary-letterlist
+        a(href="/") Back to Dictionary Listing
+        h2= leadpost.posttopic
+        each l in letterlisting
+          .mindset-photo-definition(id=`${l.termquick}`)
+            h3= l.term
+              span.edit-photo-term 
+                i.fa.fa-pencil
+            p= l.definition
+            if l.relatedterms[0].relatedterm
+              h5 Related Terms
+              each t in l.relatedterms
+                a(href=`/dictionary/${t.relatedquick}`)= t.relatedterm
