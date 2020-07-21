@@ -1,0 +1,1 @@
+# admin-mindset-dictionary
