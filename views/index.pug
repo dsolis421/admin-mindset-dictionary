@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Photography Dictionary Admin
+  h3 Access to readily insert and edit entries to mindsetphotodefs
+  .mindset-dictionary-form
+    form
+      label(for='letter') Dictionary Letter
+      br
+      input(type='text', id='letter', name='letter')
+    span#letter-search-go
+      i.fa.fa-arrow-right
