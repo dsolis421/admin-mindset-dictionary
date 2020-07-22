@@ -6,6 +6,26 @@ block content
       article.mindset-dictionary-letterlist
         a(href="/") Back to Dictionary Listing
         h2= leadpost.posttopic
+        span#add-new-term Add New Term
+        .new-term-container
+          form.new-term-form
+            label(for='new-dictionary-term') New Dictionary Term
+            br
+            input#new-dictionary-term(type='text', name='new-dictionary-term')
+            br
+            label(for='new-term-def') New Term Definition
+            br
+            textarea#new-term-def(type='text', name='new-term-def')
+            br
+            label(for='new-term-synonyms') New Term Synonyms
+            br
+            input#new-term-synonyms(type='text', name='new-term-synonyms')
+            br
+            label(for='new-term-related') New Related Terms
+            br
+            input#new-term-related(type='text', name='new-term-related')
+          span.new-term-submit Submit
+          span.new-term-cancel Cancel
         each l in letterlisting
           .mindset-photo-definition(id=`${l.termquick}`)
             h3= l.term
