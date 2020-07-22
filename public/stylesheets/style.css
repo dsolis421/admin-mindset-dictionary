@@ -24,32 +24,30 @@ time, mark, audio, video {
 
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
 }
 
 h1 {
-  font-size: 80px;
+  font: 80px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-weight: 200;
 }
 
 h2 {
-  font-size: 40px;
+  font: 40px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 h3 {
-  font-size: 30px;
+  font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 label,
-input,
 h4 {
-  font-size: 25px;
+  font: 25px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
 
 h5 {
-  font-size: 18px;
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
 
@@ -60,6 +58,7 @@ input,
 textarea,
 blockquote,
 span {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -76,12 +75,14 @@ form {
   margin: 30px auto;
 }
 
-input {
+input,
+textarea {
   height: 50px;
   width: 80px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  text-align: center;
+  text-align: left;
+  padding: 0 15px;
 }
 
 a {
@@ -97,6 +98,43 @@ a {
   line-height: 50px;
   margin: 0 auto;
   width: 80px;
+}
+
+.new-term-container {
+  height: 0;
+  margin: 20px auto;
+  overflow: hidden;
+  width: 70%;
+}
+
+.new-term-form input[type='text'] {
+  width: 50%;
+}
+
+.new-term-form textarea {
+  height: 200px;
+  width: 50%;
+  word-break: break-all;
+  word-wrap: normal;
+  padding-top: 15px;
+}
+
+.new-term-submit,
+.new-term-cancel {
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  width: 200px;
+}
+
+.new-term-submit {
+  background: #79d2a6;
+  margin-right: 20px;
+}
+
+.new-term-cancel {
+  background: #ff8080;
 }
 
 .mindset-dictionary-letterlist {
