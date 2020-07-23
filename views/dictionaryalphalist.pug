@@ -29,10 +29,13 @@ block content
             input#new-term-related(type='text', name='new-term-related')
           span.new-term-submit Submit
           span.new-term-cancel Cancel
+          .new-term-response-container
         each l in letterlisting
           .mindset-photo-definition(id=`${l.termquick}`)
             h3= l.term
             if l.term !== ''
+              span.confirm-delete-term(data-id=`${l.id}`) Confirm
+              span.cancel-delete-term Cancel
               span.delete-photo-term
                 i.fas.fa-trash-alt
               span.edit-photo-term
