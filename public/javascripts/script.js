@@ -29,12 +29,12 @@ function buildNewTerm() {
 $(document).ready(function(){
   clearNewValues();
 
-  $('#letter-search-go').click(function() {
+  $('#letter').change(function() {
     var $letter = $('#letter').val()
     var $quick = "/dictionary/" + $letter;
     console.log('selected letter '+ $quick);
     window.location.href = $quick;
-  });
+  })
 
   $('.edit-photo-term').click(function() {
     console.log('editing this term')
