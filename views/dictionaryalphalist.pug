@@ -6,7 +6,10 @@ block content
       article.mindset-dictionary-letterlist
         a(href="/") Back to Dictionary Listing
         h2= leadpost.posttopic
-        span#add-new-term Add New Term
+        .new-term-button#add-new-term
+          span
+            i.far.fa-plus-circle
+          span Add New Term
         .new-term-container
           form.new-term-form
             label(for='new-dictionary-term') New Dictionary Term
@@ -29,8 +32,11 @@ block content
         each l in letterlisting
           .mindset-photo-definition(id=`${l.termquick}`)
             h3= l.term
-              span.edit-photo-term 
-                i.fa.fa-pencil
+            if l.term !== ''
+              span.delete-photo-term
+                i.fas.fa-trash-alt
+              span.edit-photo-term
+                i.fas.fa-pencil
             p= l.definition
             if l.relatedterms[0].relatedterm
               h5 Related Terms
