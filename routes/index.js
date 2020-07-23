@@ -9,4 +9,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/dictionary/:letter', dictionaryController.getDictionaryLetter);
 
+router.post('/dictionary', dictionaryController.addPhotoTerm);
+
 module.exports = router;
