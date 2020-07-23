@@ -1,3 +1,14 @@
+/*
+new color scheme
+blue: #5DA4C1
+dark blue:  #234C5C
+orange: #F7A375
+dark orange: #E0763D
+brown: #462310
+facebook blue: #3b5998
+twitter blue: #00aced
+*/
+
 /*css reset*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -23,12 +34,15 @@ time, mark, audio, video {
 }
 
 body {
-  padding: 50px;
   text-align: center;
 }
 
+main {
+  padding: 50px;
+}
+
 h1 {
-  font: 80px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 80px "Poppins", Helvetica, Arial, sans-serif;
   font-weight: 200;
 }
 
@@ -55,6 +69,7 @@ a,
 p,
 li,
 input,
+select,
 textarea,
 blockquote,
 span {
@@ -76,6 +91,7 @@ form {
 }
 
 input,
+select,
 textarea {
   height: 50px;
   width: 80px;
@@ -89,15 +105,36 @@ a {
   color: #00B7FF;
 }
 
-#letter-search-go {
-  background: #5DA4C1;
-  border-radius: 10px;
+.header-title-container {
+  background: url('/images/mindset-banner2-blueorange-6000x2000.png');
+  background-size: cover;
+  background-position: right;
+  color: #462310;
+  padding: 10px 2%;
+}
+
+#letter {
+  background: #E0763D;
   color: #fff;
-  display: block;
+}
+
+.new-term-button {
+  background: #E0763D;
+  color: #fff;
   height: 50px;
   line-height: 50px;
-  margin: 0 auto;
-  width: 80px;
+  width: 300px;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.new-term-button span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.new-term-button span:first-of-type {
+  margin-right: 10px;
 }
 
 .new-term-container {
@@ -147,6 +184,27 @@ a {
   width: 70%;
 }
 
-.mindset-photo-definition span svg {
-  margin-left: 50px;
+.mindset-photo-definition h3 {
+  display: inline-block;
+}
+
+.edit-photo-term,
+.delete-photo-term {
+  float: right;
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+  width: 100px;
+  text-align: center;
+}
+
+.edit-photo-term {
+  background: #79d2a6;
+  color: #206020;
+  margin: 0 20px;
+}
+
+.delete-photo-term {
+  background: #ff8080;
+  color: #660000;
 }
