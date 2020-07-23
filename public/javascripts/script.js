@@ -1,5 +1,5 @@
 function expandNewTermForm() {
-  $('.new-term-container').animate({height: "675px"},"slow","swing");
+  $('.new-term-container').animate({height: "700px"},"slow","swing");
 }
 
 function clearNewValues() {
@@ -7,7 +7,16 @@ function clearNewValues() {
 }
 
 function postNewTerm(newterm) {
-  $.post("/dictionary", newterm);
+  $.post("/dictionary", newterm, function(data,status,xhr){
+    if(status == "success") {
+      clearNewValues();
+      $(".new-term-response-container").html('<span class="new-term-good">New Term Added to Dictionary</span>')
+    } else if (status == "error") {
+      $(".new-term-response-container").html('<span class="new-term-bad">A Server Error Occured, Could Not Insert New Term</span>');
+    } else if (status == "timeout") {
+      $(".new-term-response-container").html('<span class="new-term-bad">A Timeout Error Occured, Check Your Connetion and Try Again</span>');
+    }
+  });
 }
 
 function buildNewTerm() {
@@ -24,6 +33,14 @@ function buildNewTerm() {
   newtermdata.lettercategory = $lettercategory;
   console.log(newtermdata);
   postNewTerm(newtermdata);
+}
+
+function deletePhotoTerm(id) {
+  $.post("/dictionary/delete/" + id,function(data,status,xhr){
+    if(status == "success") {
+      location.reload(true);
+    }
+  });
 }
 
 $(document).ready(function(){
@@ -55,5 +72,23 @@ $(document).ready(function(){
     console.log('adding a new term');
     clearNewValues();
     $('.new-term-container').animate({height: "0px"},"slow","swing");
+  });
+
+  $('.delete-photo-term').click(function() {
+    console.log('deleting a new term');
+    $(this).siblings(".confirm-delete-term, .cancel-delete-term").animate({width: "100px"},"slow","swing");
+  });
+
+  $('.cancel-delete-term').click(function() {
+    console.log('cancel deleting a new term');
+    $(this).siblings(".confirm-delete-term").animate({width: "0px"},"slow","swing");
+    $(this).animate({width: "0px"},"slow","swing");
+  });
+
+  $('.confirm-delete-term').click(function() {
+    console.log('confirm deleting a new term');
+    var $deleteid = $(this).attr('data-id');
+    deletePhotoTerm($deleteid);
+    var $deleteid = '';
   });
 });
