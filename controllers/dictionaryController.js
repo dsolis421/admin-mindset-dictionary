@@ -18,7 +18,6 @@ exports.getDictionaryLetter = (req, res) => {
           relatedquick : ""
         }]
       };
-      console.log(letterlisting);
     }
     res.render('dictionaryalphalist', {title: 'Dictionary Admin Letter - ' + leadpost.posttopic, letterlisting, leadpost});
   })
@@ -76,4 +75,15 @@ exports.addPhotoTerm = async (req, res) => {
       return res.status(201).send({error: false});
     }
   })
+}
+
+exports.deletePhotoTerm = (req, res) => {
+  mindsetphotodefs.findByIdAndRemove(req.params.id).exec()
+  .then(() => {
+    return res.status(202).send({error: false});
+  })
+  .catch(err => {
+    return res.status(500).send(err);
+    next(err);
+  });
 }
