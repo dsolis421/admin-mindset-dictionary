@@ -121,6 +121,7 @@ a {
 .new-term-button {
   background: #E0763D;
   color: #fff;
+  cursor: pointer;
   height: 50px;
   line-height: 50px;
   width: 300px;
@@ -158,6 +159,7 @@ a {
 
 .new-term-submit,
 .new-term-cancel {
+  cursor: pointer;
   display: inline-block;
   height: 50px;
   line-height: 50px;
@@ -172,6 +174,14 @@ a {
 
 .new-term-cancel {
   background: #ff8080;
+}
+
+.new-term-good {
+  color: #E0763D;
+}
+
+.new-term-bad {
+  color: red;
 }
 
 .mindset-dictionary-letterlist {
@@ -189,13 +199,22 @@ a {
 }
 
 .edit-photo-term,
-.delete-photo-term {
+.delete-photo-term,
+.confirm-delete-term,
+.cancel-delete-term  {
   float: right;
   cursor: pointer;
   height: 30px;
   line-height: 30px;
   width: 100px;
   text-align: center;
+}
+
+.confirm-delete-term,
+.cancel-delete-term {
+  background: #ffcc00;
+  width: 0;
+  overflow: hidden;
 }
 
 .edit-photo-term {
