@@ -2,6 +2,10 @@ function expandNewTermForm() {
   $('.new-term-container').animate({height: "400px"},"slow","swing");
 }
 
+function closeNewTermForm() {
+  $('.new-term-container').animate({height: "0px"},"slow","swing");
+}
+
 function clearFormValues() {
   $('.form-text-input > input, .form-textarea-input > textarea').val('');
 }
@@ -10,25 +14,28 @@ function postNewTerm(newterm) {
   $.post("/dictionary/add", newterm, function(data,status,xhr){
     if(status == "success") {
       clearFormValues();
-      $(".new-term-response-container").html('<span class="new-term-good">New Term Added to Dictionary</span>')
+      closeNewTermForm();
+      location.reload(true);
+      $(".response-message-container").html('<span class="new-term-good">New Term Added to Dictionary</span>')
     } else if (status == "error") {
-      $(".new-term-response-container").html('<span class="new-term-bad">A Server Error Occured, Could Not Insert New Term</span>');
+      $(".response-message-container").html('<span class="new-term-bad">A Server Error Occured, Could Not Insert New Term</span>');
     } else if (status == "timeout") {
-      $(".new-term-response-container").html('<span class="new-term-bad">A Timeout Error Occured, Check Your Connetion and Try Again</span>');
+      $(".response-message-container").html('<span class="new-term-bad">A Timeout Error Occured, Check Your Connetion and Try Again</span>');
     }
   });
 }
 
 function postUpdatedTerm(updateterm) {
-  $.post("/dictionary/edit", updateterm, function(data,status,xhr){
-    /*if(status == "success") {
-      clearNewValues();
-      $(".new-term-response-container").html('<span class="new-term-good">New Term Added to Dictionary</span>')
+  $.post("/dictionary/edit/" + updateterm.id, updateterm, function(data,status,xhr){
+    if(status == "success") {
+      clearFormValues();
+      location.reload(true);
+      $(".response-message-container").html('<span class="new-term-good">Term update successful</span>')
     } else if (status == "error") {
-      $(".new-term-response-container").html('<span class="new-term-bad">A Server Error Occured, Could Not Insert New Term</span>');
+      $(".response-message-container").html('<span class="new-term-bad">A Server Error Occured, Could Not Update Term</span>');
     } else if (status == "timeout") {
-      $(".new-term-response-container").html('<span class="new-term-bad">A Timeout Error Occured, Check Your Connetion and Try Again</span>');
-    }*/
+      $(".response-message-container").html('<span class="new-term-bad">A Timeout Error Occured, Check Your Connetion and Try Again</span>');
+    }
     console.log(status);
   });
 }
@@ -50,23 +57,24 @@ function buildNewTerm() {
 }
 
 function buildUpdatedTerm() {
+  console.log("Building Updated Term");
   var updatetermdata = {};
   var $lettercategory = $('#edit-dictionary-term').val().charAt(0).toLowerCase();
   var $updatetermquick = $('#edit-term-quick').val();
   var $updatesynonyms = $('#edit-term-synonyms').val().replace(/, /g,",").split(",");
   var $updaterelated = $('#edit-term-related').val().replace(/, /g,",").split(",");
-  updatetermdata.term = $('#new-dictionary-term').val();
+  updatetermdata.id = $('#edit-term-id').val();
+  updatetermdata.term = $('#edit-dictionary-term').val();
   updatetermdata.termquick = $updatetermquick;
-  updatetermdata.definition = $('#new-term-def').val();
+  updatetermdata.definition = $('#edit-term-def').val();
   updatetermdata.synonyms = $updatesynonyms;
   updatetermdata.relatedterms = $updaterelated;
   updatetermdata.lettercategory = $lettercategory;
-  console.log(updatetermdata);
-  //postNewTerm(newtermdata);
+  postUpdatedTerm(updatetermdata);
 }
 
 function arrangeEditTerm(editterm) {
-  console.log(editterm.attr("data-relatedterms"));
+  //console.log(editterm.attr("data-relatedterms"));
   var $ineditrelated = editterm.attr("data-relatedterms")
   .replace(/[\r\n]/g,"")
   .replace(/\{.+?term:/g,"")
@@ -75,11 +83,10 @@ function arrangeEditTerm(editterm) {
   .replace("'","")
   .replace("',","")
   .trim();
-  //$ineditrelated.replace(/:/gm,"REPLACED");
-  //var $ineditrelated = editterm.attr("data-relatedterms").replace(/\{  _.+?,/g,"");
-  console.log($ineditrelated);
+  //console.log($ineditrelated);
   $("label[for='edit-dictionary-term']").text("Edit Term: " + editterm.attr("data-term"));
   $('#edit-dictionary-term').val(editterm.attr("data-term"));
+  $('#edit-term-id').val(editterm.attr("data-id"));
   $('#edit-term-quick').val(editterm.attr("data-termquick"));
   $('#edit-term-def').val(editterm.attr("data-definition"));
   $('#edit-term-synonyms').val(editterm.attr("data-synonyms"));
@@ -155,7 +162,6 @@ $(document).ready(function(){
   $('.edit-term-submit').click(function() {
     console.log('submitting updated term');
     buildUpdatedTerm();
-    clearFormValues();
     $('.edit-term-container').fadeOut();
   });
 
