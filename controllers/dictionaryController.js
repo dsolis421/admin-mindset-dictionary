@@ -2,6 +2,35 @@ var mongoose = require('mongoose');
 
 const mindsetphotodefs = mongoose.model('mindsetphotodefs');
 
+async function buildRelatedTermsArray(relatedterms) {
+  var relatedtermsready = [];
+  var loopnum = relatedterms.length;
+  for(var x = 0; x < loopnum; x++) {
+    await mindsetphotodefs.find({term: relatedterms[x]}).exec()
+    .then(term => {
+      if(term[0]){
+        console.log("Found term --> ", term[0].term)
+        var addedrelatedterm = {};
+        var addedrelatedletter = term[0].term.charAt(0).toLowerCase();
+        addedrelatedterm.relatedterm = term[0].term;
+        addedrelatedterm.relatedquick = addedrelatedletter + "/#" + term[0].termquick;
+        console.log("Added this related term --> ",addedrelatedterm);
+        relatedtermsready.push(addedrelatedterm);
+      }
+      console.log("Related Terms are ready ",relatedtermsready);
+    })
+    .catch(err => {
+      //return res.status(500).send(err);
+      next(err);
+    });
+  }
+  if (relatedtermsready.length < 1) {
+    console.log("New related terms was empty");
+    relatedtermsready.push({relatedterm: "",relatedquick: ""});
+  };
+  return relatedtermsready;
+}
+
 exports.getDictionaryLetter = (req, res) => {
   var leadpost = {};
   leadpost.posttopic = 'PHOTOGRAPHY DICTIONARY - ' + req.params.letter.toUpperCase();
@@ -19,6 +48,7 @@ exports.getDictionaryLetter = (req, res) => {
         }]
       };
     }
+    //console.log(letterlisting);
     res.render('dictionaryalphalist', {title: 'Dictionary Admin Letter - ' + leadpost.posttopic, letterlisting, leadpost});
   })
   .catch(err => {
@@ -33,7 +63,8 @@ exports.addPhotoTerm = async (req, res) => {
     console.log("Need to change relatedterms to ARRAY");
     req.body['relatedterms[]'] = [req.body['relatedterms[]']]
   }
-  for(var x = 0; x < req.body['relatedterms[]'].length; x++) {
+  newrelatedterms = await buildRelatedTermsArray(req.body['relatedterms[]']);
+  /*for(var x = 0; x < req.body['relatedterms[]'].length; x++) {
     await mindsetphotodefs.find({term: req.body['relatedterms[]'][x]}).exec()
     .then(term => {
       if(term[0]){
@@ -52,11 +83,8 @@ exports.addPhotoTerm = async (req, res) => {
       return res.status(500).send(err);
       next(err);
     });
-  }
-  if (newrelatedterms.length < 1) {
-    console.log("New related terms was empty");
-    newrelatedterms.push({relatedterm: "",relatedquick: ""});
-  };
+  }*/
+  console.log("New related terms handed back to [MONGODB] ", newrelatedterms);
   newdictionaryterm = {
     term: req.body.term,
     termquick: req.body.termquick,
@@ -74,7 +102,35 @@ exports.addPhotoTerm = async (req, res) => {
     } else {
       return res.status(201).send({error: false});
     }
-  })
+  });
+}
+
+exports.editPhotoTerm = async (req, res) => {
+  var updatedDictionaryTerm = {};
+  var editedRelatedTerms = [];
+  console.log("Working on updated photo term at the server");
+  if (typeof req.body['relatedterms[]'] == "string") {
+    console.log("Need to change relatedterms to ARRAY");
+    req.body['relatedterms[]'] = [req.body['relatedterms[]']]
+  }
+  editedRelatedTerms = await buildRelatedTermsArray(req.body['relatedterms[]']);
+  updatedDictionaryTerm = {
+    term: req.body.term,
+    termquick: req.body.termquick,
+    definition: req.body.definition,
+    synonyms: req.body['synonyms[]'] || [],
+    relatedterms: editedRelatedTerms,
+    lettercategory: req.body.lettercategory
+  }
+  console.log("Here's the updated term ready to go to [MONDGODB] ", updatedDictionaryTerm);
+  mindsetphotodefs.findByIdAndUpdate({_id: req.body.id},updatedDictionaryTerm, (err, result) => {
+    if(err) {
+      return res.status(500).send(err);
+    } else {
+      return res.status(202).send({error: false});
+    }
+  });
+  //console.log(req.body);
 }
 
 exports.deletePhotoTerm = (req, res) => {
