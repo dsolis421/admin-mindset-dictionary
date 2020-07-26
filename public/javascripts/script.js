@@ -1,21 +1,35 @@
 function expandNewTermForm() {
-  $('.new-term-container').animate({height: "700px"},"slow","swing");
+  $('.new-term-container').animate({height: "400px"},"slow","swing");
 }
 
-function clearNewValues() {
-  $('.new-term-form > input, .new-term-form > textarea').val('');
+function clearFormValues() {
+  $('.form-text-input > input, .form-textarea-input > textarea').val('');
 }
 
 function postNewTerm(newterm) {
-  $.post("/dictionary", newterm, function(data,status,xhr){
+  $.post("/dictionary/add", newterm, function(data,status,xhr){
     if(status == "success") {
-      clearNewValues();
+      clearFormValues();
       $(".new-term-response-container").html('<span class="new-term-good">New Term Added to Dictionary</span>')
     } else if (status == "error") {
       $(".new-term-response-container").html('<span class="new-term-bad">A Server Error Occured, Could Not Insert New Term</span>');
     } else if (status == "timeout") {
       $(".new-term-response-container").html('<span class="new-term-bad">A Timeout Error Occured, Check Your Connetion and Try Again</span>');
     }
+  });
+}
+
+function postUpdatedTerm(updateterm) {
+  $.post("/dictionary/edit", updateterm, function(data,status,xhr){
+    /*if(status == "success") {
+      clearNewValues();
+      $(".new-term-response-container").html('<span class="new-term-good">New Term Added to Dictionary</span>')
+    } else if (status == "error") {
+      $(".new-term-response-container").html('<span class="new-term-bad">A Server Error Occured, Could Not Insert New Term</span>');
+    } else if (status == "timeout") {
+      $(".new-term-response-container").html('<span class="new-term-bad">A Timeout Error Occured, Check Your Connetion and Try Again</span>');
+    }*/
+    console.log(status);
   });
 }
 
@@ -35,6 +49,43 @@ function buildNewTerm() {
   postNewTerm(newtermdata);
 }
 
+function buildUpdatedTerm() {
+  var updatetermdata = {};
+  var $lettercategory = $('#edit-dictionary-term').val().charAt(0).toLowerCase();
+  var $updatetermquick = $('#edit-term-quick').val();
+  var $updatesynonyms = $('#edit-term-synonyms').val().replace(/, /g,",").split(",");
+  var $updaterelated = $('#edit-term-related').val().replace(/, /g,",").split(",");
+  updatetermdata.term = $('#new-dictionary-term').val();
+  updatetermdata.termquick = $updatetermquick;
+  updatetermdata.definition = $('#new-term-def').val();
+  updatetermdata.synonyms = $updatesynonyms;
+  updatetermdata.relatedterms = $updaterelated;
+  updatetermdata.lettercategory = $lettercategory;
+  console.log(updatetermdata);
+  //postNewTerm(newtermdata);
+}
+
+function arrangeEditTerm(editterm) {
+  console.log(editterm.attr("data-relatedterms"));
+  var $ineditrelated = editterm.attr("data-relatedterms")
+  .replace(/[\r\n]/g,"")
+  .replace(/\{.+?term:/g,"")
+  .replace(/relatedquick:.+?}/g,"")
+  .replace(/',  , '/g,",")
+  .replace("'","")
+  .replace("',","")
+  .trim();
+  //$ineditrelated.replace(/:/gm,"REPLACED");
+  //var $ineditrelated = editterm.attr("data-relatedterms").replace(/\{  _.+?,/g,"");
+  console.log($ineditrelated);
+  $("label[for='edit-dictionary-term']").text("Edit Term: " + editterm.attr("data-term"));
+  $('#edit-dictionary-term').val(editterm.attr("data-term"));
+  $('#edit-term-quick').val(editterm.attr("data-termquick"));
+  $('#edit-term-def').val(editterm.attr("data-definition"));
+  $('#edit-term-synonyms').val(editterm.attr("data-synonyms"));
+  $('#edit-term-related').val($ineditrelated);
+}
+
 function deletePhotoTerm(id) {
   $.post("/dictionary/delete/" + id,function(data,status,xhr){
     if(status == "success") {
@@ -44,22 +95,18 @@ function deletePhotoTerm(id) {
 }
 
 $(document).ready(function(){
-  clearNewValues();
+  clearFormValues();
 
   $('#letter').change(function() {
     var $letter = $('#letter').val()
     var $quick = "/dictionary/" + $letter;
     console.log('selected letter '+ $quick);
     window.location.href = $quick;
-  })
-
-  $('.edit-photo-term').click(function() {
-    console.log('editing this term')
   });
 
   $('#add-new-term').click(function() {
     console.log('adding a new term');
-    clearNewValues();
+    clearFormValues();
     expandNewTermForm();
   });
 
@@ -70,7 +117,7 @@ $(document).ready(function(){
 
   $('.new-term-cancel').click(function() {
     console.log('adding a new term');
-    clearNewValues();
+    clearFormValues();
     $('.new-term-container').animate({height: "0px"},"slow","swing");
   });
 
@@ -91,4 +138,31 @@ $(document).ready(function(){
     deletePhotoTerm($deleteid);
     var $deleteid = '';
   });
+
+  $('.edit-photo-term').click(function() {
+    var editterm = $(this).parent().attr("data-term");
+    var edittermelement = $(this).parent();
+    console.log('editing term - ' + editterm);
+    arrangeEditTerm(edittermelement);
+    $('.edit-term-container').fadeIn();
+  });
+
+  $('#edit-dictionary-term').change(function() {
+    $changingtermquick = $(this).val().toLowerCase().replaceAll("(","").replaceAll(")","").replaceAll(" ","-");
+    $('#edit-term-quick').val($changingtermquick);
+  });
+
+  $('.edit-term-submit').click(function() {
+    console.log('submitting updated term');
+    buildUpdatedTerm();
+    clearFormValues();
+    $('.edit-term-container').fadeOut();
+  });
+
+  $('.edit-term-cancel').click(function() {
+    console.log('canceling edit term');
+    clearFormValues();
+    $('.edit-term-container').fadeOut();
+  });
+
 });
