@@ -12,26 +12,35 @@ block content
           span Add New Term
         .new-term-container
           form.new-term-form
-            label(for='new-dictionary-term') New Dictionary Term
-            br
-            input#new-dictionary-term(type='text', name='new-dictionary-term')
-            br
-            label(for='new-term-def') New Term Definition
-            br
-            textarea#new-term-def(type='text', name='new-term-def')
-            br
-            label(for='new-term-synonyms') New Term Synonyms
-            br
-            input#new-term-synonyms(type='text', name='new-term-synonyms')
-            br
-            label(for='new-term-related') New Related Terms
-            br
-            input#new-term-related(type='text', name='new-term-related')
-          span.new-term-submit Submit
-          span.new-term-cancel Cancel
+            .form-text-input
+              label(for='new-dictionary-term') New Dictionary Term
+              br
+              input#new-dictionary-term(type='text', name='new-dictionary-term')
+              br
+              br
+              label(for='new-term-synonyms') New Term Synonyms
+              br
+              input#new-term-synonyms(type='text', name='new-term-synonyms')
+              br
+              label(for='new-term-related') New Related Terms
+              br
+              input#new-term-related(type='text', name='new-term-related')
+            .form-textarea-input
+              label(for='new-term-def') New Term Definition
+              br
+              textarea#new-term-def(type='text', name='new-term-def')
+              br
+              span.new-term-submit Submit
+              span.new-term-cancel Cancel
           .new-term-response-container
         each l in letterlisting
-          .mindset-photo-definition(id=`${l.termquick}`)
+          .mindset-photo-definition(id=`${l.termquick}`,
+            data-id=`${l._id}`,
+            data-term=`${l.term}`,
+            data-termquick=`${l.termquick}`,
+            data-definition=`${l.definition}`,
+            data-synonyms=`${l.synonyms}`,
+            data-relatedterms=`${l.relatedterms}`)
             h3= l.term
             if l.term !== ''
               span.confirm-delete-term(data-id=`${l.id}`) Confirm
@@ -45,3 +54,27 @@ block content
               h5 Related Terms
               each t in l.relatedterms
                 a(href=`/dictionary/${t.relatedquick}`)= t.relatedterm
+        .edit-term-container
+          form.edit-term-form
+            .form-text-input
+              label(for='edit-dictionary-term')
+              br
+              input#edit-dictionary-term(type='text', name='edit-dictionary-term')
+              br
+              input#edit-term-quick(type='text', name='edit-term-quick', disabled)
+              br
+              label(for='edit-term-synonyms') Edit Term Synonyms
+              br
+              input#edit-term-synonyms(type='text', name='edit-term-synonyms')
+              br
+              label(for='edit-term-related') Edit Related Terms
+              br
+              input#edit-term-related(type='text', name='edit-term-related')
+            .form-textarea-input
+              label(for='edit-term-def') Edit Term Definition
+              br
+              textarea#edit-term-def(type='text', name='edit-term-def')
+              br
+              span.edit-term-submit Submit
+              span.edit-term-cancel Cancel
+          .edit-term-response-container
