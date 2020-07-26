@@ -9,8 +9,10 @@ router.get('/', function(req, res, next) {
 
 router.get('/dictionary/:letter', dictionaryController.getDictionaryLetter);
 
-router.post('/dictionary', dictionaryController.addPhotoTerm);
+router.post('/dictionary/add', dictionaryController.addPhotoTerm);
 
 router.post('/dictionary/delete/:id', dictionaryController.deletePhotoTerm);
+
+router.post('/dictionary/edit/:id', dictionaryController.editPhotoTerm);
 
 module.exports = router;
