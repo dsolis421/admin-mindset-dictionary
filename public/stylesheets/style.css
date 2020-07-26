@@ -142,36 +142,56 @@ a {
   height: 0;
   margin: 20px auto;
   overflow: hidden;
-  width: 70%;
+  width: 100%;
 }
 
+.new-term-form,
+.edit-term-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.form-text-input,
+.form-textarea-input {
+  margin: 0 auto;
+  width: 40%;
+}
+
+.edit-term-form input[type='text'],
 .new-term-form input[type='text'] {
-  width: 50%;
+  width: 90%;
 }
 
-.new-term-form textarea {
-  height: 200px;
-  width: 50%;
-  word-break: break-all;
+.form-textarea-input textarea {
+  height: 175px;
+  width: 90%;
+  word-break: keep-all;
   word-wrap: normal;
   padding-top: 15px;
 }
 
+.edit-term-submit,
+.edit-term-cancel,
 .new-term-submit,
 .new-term-cancel {
   cursor: pointer;
   display: inline-block;
   height: 50px;
   line-height: 50px;
+  margin-top: 10px;
   text-align: center;
   width: 200px;
 }
 
+.edit-term-submit,
 .new-term-submit {
   background: #79d2a6;
   margin-right: 20px;
 }
 
+.edit-term-cancel,
 .new-term-cancel {
   background: #ff8080;
 }
@@ -185,6 +205,7 @@ a {
 }
 
 .mindset-dictionary-letterlist {
+  position: relative;
   text-align: left;
 }
 
@@ -192,6 +213,10 @@ a {
   height: auto;
   margin: 20px auto;
   width: 70%;
+}
+
+.mindset-photo-definition a {
+  margin: 5px 10px 5px 0px;
 }
 
 .mindset-photo-definition h3 {
@@ -208,6 +233,17 @@ a {
   line-height: 30px;
   width: 100px;
   text-align: center;
+}
+
+.edit-term-container {
+  background: #5DA4C1;
+  display: none;
+  min-height: 470px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 100;
 }
 
 .confirm-delete-term,
