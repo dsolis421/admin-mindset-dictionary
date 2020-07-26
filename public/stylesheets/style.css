@@ -34,7 +34,8 @@ time, mark, audio, video {
 }
 
 body {
-  text-align: center;
+  text-align: left;
+  color: #462310;
 }
 
 main {
@@ -44,25 +45,30 @@ main {
 h1 {
   font: 80px "Poppins", Helvetica, Arial, sans-serif;
   font-weight: 200;
+  margin: 20px 0;
 }
 
 h2 {
   font: 40px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 15px 0;
 }
 
 h3 {
   font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 10px 0;
 }
 
 label,
 h4 {
   font: 25px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-weight: bold;
+  margin: 10px 0;
 }
 
 h5 {
   font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-weight: bold;
+  margin: 10px 0;
 }
 
 a,
@@ -73,7 +79,7 @@ select,
 textarea,
 blockquote,
 span {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -87,7 +93,6 @@ br {
 
 form {
   display: block;
-  margin: 30px auto;
 }
 
 input,
@@ -102,7 +107,17 @@ textarea {
 }
 
 a {
-  color: #00B7FF;
+  color: inherit;
+}
+
+ol,
+ul {
+  padding: 5px 50px;
+}
+
+p,
+li {
+  margin: 15px 0;
 }
 
 .header-title-container {
@@ -116,6 +131,18 @@ a {
 #letter {
   background: #E0763D;
   color: #fff;
+  width: 100px;
+  margin-left: 20px;
+}
+
+.mindset-dictionary-selector {
+  display: inline-block;
+  margin-left: 80px;
+  text-align: center;
+}
+
+.header-title-container a {
+  font-size: 30px;
 }
 
 .new-term-button {
@@ -139,6 +166,7 @@ a {
 }
 
 .new-term-container {
+  background: #5DA4C1;
   height: 0;
   margin: 20px auto;
   overflow: hidden;
@@ -151,6 +179,7 @@ a {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 30px auto;
 }
 
 .form-text-input,
