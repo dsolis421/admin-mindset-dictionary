@@ -10,6 +10,7 @@ block content
           span
             i.far.fa-plus-circle
           span Add New Term
+        .response-message-container
         .new-term-container
           form.new-term-form
             .form-text-input
@@ -32,7 +33,6 @@ block content
               br
               span.new-term-submit Submit
               span.new-term-cancel Cancel
-          .new-term-response-container
         each l in letterlisting
           .mindset-photo-definition(id=`${l.termquick}`,
             data-id=`${l._id}`,
@@ -63,6 +63,8 @@ block content
               br
               input#edit-term-quick(type='text', name='edit-term-quick', disabled)
               br
+              input#edit-term-id(type='text', name='edit-term-id', disabled)
+              br
               label(for='edit-term-synonyms') Edit Term Synonyms
               br
               input#edit-term-synonyms(type='text', name='edit-term-synonyms')
@@ -77,4 +79,3 @@ block content
               br
               span.edit-term-submit Submit
               span.edit-term-cancel Cancel
-          .edit-term-response-container
