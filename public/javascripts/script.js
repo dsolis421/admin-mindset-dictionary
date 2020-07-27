@@ -152,6 +152,9 @@ $(document).ready(function(){
     console.log('editing term - ' + editterm);
     arrangeEditTerm(edittermelement);
     $('.edit-term-container').fadeIn();
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $("#add-new-term").offset().top - 100
+    }, 1000);
   });
 
   $('#edit-dictionary-term').change(function() {
