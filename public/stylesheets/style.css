@@ -46,6 +46,7 @@ h1 {
   font: 80px "Poppins", Helvetica, Arial, sans-serif;
   font-weight: 200;
   margin: 20px 0;
+  color: #462310;
 }
 
 h2 {
@@ -56,6 +57,7 @@ h2 {
 h3 {
   font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 10px 0;
+  color: #462310;
 }
 
 label,
@@ -63,12 +65,14 @@ h4 {
   font: 25px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-weight: bold;
   margin: 10px 0;
+  color: #462310;
 }
 
 h5 {
   font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-weight: bold;
   margin: 10px 0;
+  color: #462310;
 }
 
 a,
@@ -291,4 +295,10 @@ li {
 .delete-photo-term {
   background: #ff8080;
   color: #660000;
+}
+
+@media screen and (max-width: 1200px) {
+  .mindset-photo-definition {
+    width: 90%;
+  }
 }
