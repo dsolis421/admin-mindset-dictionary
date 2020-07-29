@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 /*put models here*/
 require('./models/mindsetDictionarySchema');
+require('./models/mindsetPostsSchema');
 
 var app = express();
 
