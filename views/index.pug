@@ -2,37 +2,10 @@ extends layout
 
 block content
   main
-    h3 Overview
-    p The Dictionary Admin tool provides a UI to add, update, or delete dictionary terms from the Photography Mindset Dictionary page. 
-      |This dictionary appears on the #[a(href="https://photography-mindset.com/dictionary") photography-mindset.com website] for visitors to reference the definition of photography terms.
-    p Photography definitions in the photography-mindset.com dictionary are meant to be concise definitions of terminology. 
-      |Content within this dictionary is not intented to provide elaborate descriptions like you would find on a wiki or blog. It is also not meant to provide instruction on how to implement the listed term. 
-    p Proper spelling is critical to ensure that the photography term is listed correctly within the dictionary and easy to locate for viewers. 
-    p Definitions should be unopinionated and given in the context of photography or videography.
-    h5 Add a Dictionary Term
-    p New dictionary terms can be added from any dictionary letter page.
-    ol
-      li Navigate to the dictionary letter page to check if the term already exists.
-      li Click the orange 'Add New Term' button at the top of the dictionary letter page to open the new term form.
-      li Input the dictionary term as you would like it to appear on the site.
-      li Input any synonym words, separated by a comma
-      li Input any related terms, separated by a comma. Note, related terms are meant to create hyperlinks to other dictionary terms that exist in the database. If the related term is not found in the dictionary, it will not be saved to this field.  Be sure to spell the related term exactly as it appears on the dictionary page, including any spaces and parentheses.
-      li Input the new term definition as you would like for it to appear in the dictionary.
-      li Verify all fields have the proper information
-      li Click the green 'Submit' button to save the new term to the dictionary
-      li Click the red 'Cancel' button to discard the new term and return to the dictionary letter page.
-    h5 Update a Dictionary Term
-    p Existing dictionary terms can be changed from the dictionary letter page where the term is listed.
-    ol
-      li Navigate to the dictionary letter page where the term appears.
-      li Click the green pencil icon button next to the dictionary term.
-      li Update any necessary information in the displayed input fields.  The system-generated link for the term will automatically update when the dictionary term changes. This may effect links displayed on other dictionary related terms, or any other place where the term is linked. Any updates made to the related terms field must follow the same input requirements, listed above in item 5 of 'Add New Dictionary Term'
-      li Click the green 'Submit' button to save the updated term to the dictionary 
-      li Click the red 'Cancel' button to discard the changes and return to the dictionary letter page.
-    h5 Delete a Dictionary Term
-    p Existing dictionary terms can be removed from the dictionary letter page where the term is listed. Once confirmed this cannot be undone.
-    ol
-      li Navigate to the dictionary letter page where the term appears.
-      li Click the red trash can button next to the dictionary term.
-      li Click the yellow 'Confirm' button to verify intent and remove the term permanently from the dictionary. 
-      li Click the yellow 'Cancel' button to escape the delete function and retain the term in the dictionary.
+    .landing-menu-section
+      a(href='/dictionary')
+        .large-goto-button
+          h2 DICTIONARY ADMIN
+      a(href='/blog')
+        .large-goto-button
+          h2 BLOG ADMIN
