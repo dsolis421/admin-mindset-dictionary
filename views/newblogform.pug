@@ -3,10 +3,13 @@ extends layout
 block content
   main
     section.new-blog-section
-      span.new-blog-save
-        i.far.fa-save.fa-lg
-      span.new-blog-cancel
-        i.far.fa-times-square.fa-lg
+      .new-blog-menu
+        span.new-blog-save
+          i.far.fa-save.fa-lg
+        span.new-blog-cancel
+          i.far.fa-times-square.fa-lg
+        span.new-blog-addsection
+          i.far.fa-plus-circle.fa-lg
       form.new-blog-form
         .form-text-input
           label(for='new-dictionary-term') New BLog Title
@@ -36,6 +39,8 @@ block content
           br
           textarea#new-blog-subtext(type='text', name='new-blog-subtext', placeholder='Subsection Text')
           br
-          input#new-blog-suborder(type='text', name='new-blog-suborder', placeholder='#')
+          input#new-blog-suborder(type='number', name='new-blog-suborder', placeholder='#')
           br
+          br
+              
           
