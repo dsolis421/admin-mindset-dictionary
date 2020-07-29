@@ -11,6 +11,10 @@ router.get('/dictionary/:letter', dictionaryController.getDictionaryLetter);
 
 router.post('/dictionary/add', dictionaryController.addPhotoTerm);
 
+router.get('/blog/create', (req, res) => {
+  res.render('newblogform', {title: 'CREATE NEW BLOG POST'});
+});
+
 router.post('/dictionary/delete/:id', dictionaryController.deletePhotoTerm);
 
 router.post('/dictionary/edit/:id', dictionaryController.editPhotoTerm);
