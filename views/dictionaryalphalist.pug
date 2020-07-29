@@ -29,10 +29,11 @@ block content
               br
               textarea#new-term-def(type='text', name='new-term-def')
               br
-              span.new-term-submit
-                i.far.fa-save.fa-lg
-              span.new-term-cancel
-                i.far.fa-times-square.fa-lg
+              .edit-form-buttons
+                span.new-term-submit
+                  i.far.fa-save.fa-lg
+                span.new-term-cancel
+                  i.far.fa-times-square.fa-lg
         each l in letterlisting
           .mindset-photo-definition(id=`${l.termquick}`,
             data-id=`${l._id}`,
@@ -77,7 +78,8 @@ block content
               br
               textarea#edit-term-def(type='text', name='edit-term-def')
               br
-              span.edit-term-submit
-                i.far.fa-save.fa-lg
-              span.edit-term-cancel
-                i.far.fa-times-square.fa-lg
+              .edit-form-buttons
+                span.edit-term-submit
+                  i.far.fa-save.fa-lg
+                span.edit-term-cancel
+                  i.far.fa-times-square.fa-lg
