@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 const mindsetphotodefs = mongoose.model('mindsetphotodefs');
+const mindsetblogposts = mongoose.model('mindsetposts');
 
 async function buildRelatedTermsArray(relatedterms) {
   var relatedtermsready = [];
@@ -142,4 +143,46 @@ exports.deletePhotoTerm = (req, res) => {
     return res.status(500).send(err);
     next(err);
   });
+}
+
+exports.addNewBlog = (req, res) => {
+  console.log("Add new blog request received");
+  var newcontent = JSON.parse(req.body.content);
+  console.log(newcontent);
+  var newdate = new Date();
+  var newquick = req.body.title.toLowerCase().replace(/ /g,"-");
+  const newblogpost = {
+    posttitle : req.body.title,
+    postdate : newdate,
+    posttopic : req.body.topic,
+    postquick : newquick,
+    postsummary : req.body.summary,
+    postcontent : newcontent,
+    postimage : req.body.image,
+    posttnail : req.body.tnail,
+    showpost : 'n'
+  };
+  console.log("Delivering new blog to [MONGODB]");
+  const READYPHOTOBLOG = new mindsetblogposts(newblogpost);
+  READYPHOTOBLOG.save(err => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send(err);
+    } else {
+      return res.status(201).send({error: false});
+    }
+  });
+  /*for(x = 0; x < req.body.content.length;x++) {
+    console.log(req.body.content[x].subheader);
+  }*/
+
+  /*const READYPHOTOTERM = new mindsetphotodefs(newdictionaryterm);
+  READYPHOTOTERM.save(err => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send(err);
+    } else {
+      return res.status(201).send({error: false});
+    }
+  });*/
 }
