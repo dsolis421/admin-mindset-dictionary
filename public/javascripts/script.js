@@ -7,7 +7,7 @@ function closeNewTermForm() {
 }
 
 function clearFormValues() {
-  $('.form-text-input > input, .form-textarea-input > textarea').val('');
+  $('.form-text-input > input, .form-textarea-input > textarea, .form-textarea-input > input').val('');
 }
 
 function postNewTerm(newterm) {
@@ -37,6 +37,20 @@ function postUpdatedTerm(updateterm) {
       $(".response-message-container").html('<span class="new-term-bad">A Timeout Error Occured, Check Your Connetion and Try Again</span>');
     }
     console.log(status);
+  });
+}
+
+function postNewBlog(newblog) {
+  $.post("/blog/add", newblog, function(data,status,xhr){
+    if(status == "success") {
+      clearFormValues();
+      alert("New blog post created!");
+      $(".response-message-container").html('<span class="new-term-good">New Term Added to Dictionary</span>')
+    } else if (status == "error") {
+      $(".response-message-container").html('<span class="new-term-bad">A Server Error Occured, Could Not Insert New Term</span>');
+    } else if (status == "timeout") {
+      $(".response-message-container").html('<span class="new-term-bad">A Timeout Error Occured, Check Your Connetion and Try Again</span>');
+    }
   });
 }
 
@@ -73,6 +87,29 @@ function buildUpdatedTerm() {
   postUpdatedTerm(updatetermdata);
 }
 
+function buildNewBlog() {
+  console.log('Building new blog post');
+  var $newblogdata = {};
+  var $newblogcontent = [];
+  $('.form-textarea-input').each(function(){
+    var $subcontent = {};
+    $subcontent.postsubheader = jQuery(this).find('#new-blog-subheader').val();
+    $subcontent.postsubimage = jQuery(this).find('#new-blog-subimage').val();
+    $subcontent.postsubtext = jQuery(this).find('#new-blog-subtext').val();
+    $subcontent.postsuborder = jQuery(this).find('#new-blog-suborder').val();
+    console.log("Adding subcontent " + $subcontent);
+    $newblogcontent.push($subcontent);
+  });
+  $newblogdata.title = $('#new-blog-title').val();
+  $newblogdata.topic = $('#new-blog-topic').val();
+  $newblogdata.summary = $('#new-blog-summary').val();
+  $newblogdata.image = $('#new-blog-image').val();
+  $newblogdata.tnail = $('#new-blog-tnail').val();;
+  $newblogdata.content = JSON.stringify($newblogcontent);
+  console.log($newblogdata);
+  postNewBlog($newblogdata);
+}
+
 function arrangeEditTerm(editterm) {
   //console.log(editterm.attr("data-relatedterms"));
   var $ineditrelated = editterm.attr("data-relatedterms")
@@ -102,7 +139,7 @@ function deletePhotoTerm(id) {
 }
 
 $(document).ready(function(){
-  clearFormValues();
+  //clearFormValues();
 
   $('#letter').change(function() {
     var $letter = $('#letter').val()
@@ -174,4 +211,18 @@ $(document).ready(function(){
     $('.edit-term-container').fadeOut();
   });
 
+  $('.new-blog-save').click(function() {
+    console.log('saving new blog');
+    buildNewBlog();
+  });
+
+  $('.new-blog-addsection').click(function() {
+    console.log('adding new blog subsection');
+    $('.new-blog-form').append('<div class="form-textarea-input">\
+      <input id="new-blog-subheader" type="text" name="new-blog-subheader" placeholder="Subsection Header"></input><br>\
+      <input id="new-blog-subimage" type="text" name="new-blog-subimage" placeholder="Subsection Image Link"></input><br>\
+      <textarea id="new-blog-subtext" type="text" name="new-blog-subtext" placeholder="Subsection Text"></textarea><br>\
+      <input id="new-blog-suborder" type="number" name="new-blog-suborder" placeholder="#"></input><br><br>\
+      </div>')
+  });
 });
