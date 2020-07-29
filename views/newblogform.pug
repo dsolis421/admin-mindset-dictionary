@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  main
+    section.new-blog-section
+      span.new-blog-save
+        i.far.fa-save.fa-lg
+      span.new-blog-cancel
+        i.far.fa-times-square.fa-lg
+      form.new-blog-form
+        .form-text-input
+          label(for='new-dictionary-term') New BLog Title
+          br
+          input#new-blog-title(type='text', name='new-blog-title')
+          br
+          label(for='new-blog-topic') New Blog Topic
+          br
+          input#new-blog-topic(type='text', name='new-blog-topic')
+          br
+          label(for='new-blog-summary') New Blog Summary
+          br
+          input#new-blog-summary(type='text', name='new-blog-summary')
+          br
+          label(for='new-blog-image') New Blog Main Image Link
+          br
+          input#new-blog-image(type='text', name='new-blog-image')
+          br
+          label(for='new-blog-tnail') New Blog Thumbnail Link
+          br
+          input#new-blog-tnail(type='text', name='new-blog-tnail')
+        .form-textarea-input
+          h4 New Blog Content
+          input#new-blog-subheader(type='text', name='new-blog-subheader', placeholder='Subsection Header')
+          br
+          input#new-blog-subimage(type='text', name='new-blog-subimage', placeholder='Subsection Image Link')
+          br
+          textarea#new-blog-subtext(type='text', name='new-blog-subtext', placeholder='Subsection Text')
+          br
+          input#new-blog-suborder(type='text', name='new-blog-suborder', placeholder='#')
+          br
+          
