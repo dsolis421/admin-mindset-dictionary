@@ -132,6 +132,15 @@ li {
   padding: 10px 2%;
 }
 
+.large-goto-button {
+  background: #5DA4C1;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  margin: 30px auto;
+  width: 600px;
+}
+
 #letter {
   background: #E0763D;
   color: #fff;
@@ -160,12 +169,19 @@ li {
   margin: 20px auto;
 }
 
-.new-blog-save
-.new-blog-cancel
-.new-term-submit
-.new-term-cancel
+.new-blog-menu {
+  width: 20%;
+  height: auto;
+  position: fixed;
+}
+
+.new-blog-save,
+.new-blog-cancel,
+.new-blog-addsection,
+.new-term-submit,
+.new-term-cancel,
 .new-term-button span,
-.edit-term-submit
+.edit-term-submit,
 .edit-term-cancel {
   font-size: 20px;
   font-weight: bold;
@@ -183,6 +199,7 @@ li {
   width: 100%;
 }
 
+.edit-form-buttons,
 .new-term-form,
 .edit-term-form {
   display: flex;
@@ -213,16 +230,16 @@ li {
 
 .new-blog-save,
 .new-blog-cancel,
+.new-blog-addsection,
 .edit-term-submit,
 .edit-term-cancel,
 .new-term-submit,
 .new-term-cancel {
+  display: block;
   cursor: pointer;
-  display: inline-block;
   height: 50px;
   line-height: 50px;
-  margin-top: 10px;
-  margin-right: 20px;
+  margin: 10px auto;
   text-align: center;
   width: 200px;
 }
@@ -237,6 +254,10 @@ li {
 .edit-term-cancel,
 .new-term-cancel {
   background: #ff8080;
+}
+
+.new-blog-addsection {
+  border: 1px solid #462310;
 }
 
 .new-term-good {
