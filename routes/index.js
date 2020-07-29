@@ -7,6 +7,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Admin' });
 });
 
+router.get('/dictionary', function(req, res, next) {
+  res.render('dictionarylanding', {title: 'DICTIONARY'});
+});
+
+router.get('/blog', function(req, res, next) {
+  res.render('bloglanding', {title: 'BLOG'});
+});
+
 router.get('/dictionary/:letter', dictionaryController.getDictionaryLetter);
 
 router.post('/dictionary/add', dictionaryController.addPhotoTerm);
@@ -14,6 +22,8 @@ router.post('/dictionary/add', dictionaryController.addPhotoTerm);
 router.get('/blog/create', (req, res) => {
   res.render('newblogform', {title: 'CREATE NEW BLOG POST'});
 });
+
+router.post('/blog/add', dictionaryController.addNewBlog);
 
 router.post('/dictionary/delete/:id', dictionaryController.deletePhotoTerm);
 
