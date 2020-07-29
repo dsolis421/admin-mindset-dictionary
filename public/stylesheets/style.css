@@ -160,7 +160,13 @@ li {
   margin: 20px auto;
 }
 
-.new-term-button span {
+.new-blog-save
+.new-blog-cancel
+.new-term-submit
+.new-term-cancel
+.new-term-button span,
+.edit-term-submit
+.edit-term-cancel {
   font-size: 20px;
   font-weight: bold;
 }
@@ -192,8 +198,8 @@ li {
   width: 40%;
 }
 
-.edit-term-form input[type='text'],
-.new-term-form input[type='text'] {
+.form-text-input input,
+.form-textarea-input input:not(#new-blog-suborder) {
   width: 90%;
 }
 
@@ -205,6 +211,8 @@ li {
   padding-top: 15px;
 }
 
+.new-blog-save,
+.new-blog-cancel,
 .edit-term-submit,
 .edit-term-cancel,
 .new-term-submit,
@@ -214,16 +222,18 @@ li {
   height: 50px;
   line-height: 50px;
   margin-top: 10px;
+  margin-right: 20px;
   text-align: center;
   width: 200px;
 }
 
+.new-blog-save,
 .edit-term-submit,
 .new-term-submit {
   background: #79d2a6;
-  margin-right: 20px;
 }
 
+.new-blog-cancel,
 .edit-term-cancel,
 .new-term-cancel {
   background: #ff8080;
