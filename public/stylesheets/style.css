@@ -179,6 +179,10 @@ li {
   margin: 20px auto;
 }
 
+.blog-post-preview {
+  float: right;
+}
+
 .new-blog-menu,
 .edit-blog-menu {
   width: 20%;
@@ -198,6 +202,37 @@ li {
 
 .fa-toggle-on {
   color: #5DA4C1;
+}
+
+.blog-article-header {
+  background-position: left;
+  background-size: cover;
+  height: auto;
+  min-height: 300px;
+}
+
+.blog-article-headline {
+  background: #5DA4C1;
+  color: #fff;
+  width: 25%;
+  height: auto;
+  min-height: 300px;
+  float: left;
+  padding: 1%;
+}
+
+.blog-article-subsection {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.blog-article-subsection img {
+  display: block;
+  width: 90%;
+  max-width: 600px;
+  height: auto;
+  max-height: 400px;
+  margin: 0px auto;
 }
 
 .mindset-dictionary-selector {
@@ -387,6 +422,12 @@ li {
   background: #ff8080;
   color: #660000;
   width: 100px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 @media screen and (max-width: 1200px) {
