@@ -2,13 +2,15 @@ extends layout
 
 block content
   main
+    h2= leadpost.posttopic
+    .mindset-dictionary-menu
+      include alphaselector.pug
+      .new-term-button#add-new-term
+        span
+          i.far.fa-plus-circle
+        span Add New Term
     section.mindset-dictionary-lettercategory
       article.mindset-dictionary-letterlist
-        h2= leadpost.posttopic
-        .new-term-button#add-new-term
-          span
-            i.far.fa-plus-circle
-          span Add New Term
         .response-message-container
         .new-term-container
           form.new-term-form
