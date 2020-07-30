@@ -49,7 +49,6 @@ exports.getDictionaryLetter = (req, res) => {
         }]
       };
     }
-    //console.log(letterlisting);
     res.render('dictionaryalphalist', {title: 'Dictionary Admin Letter - ' + leadpost.posttopic, letterlisting, leadpost});
   })
   .catch(err => {
@@ -65,27 +64,6 @@ exports.addPhotoTerm = async (req, res) => {
     req.body['relatedterms[]'] = [req.body['relatedterms[]']]
   }
   newrelatedterms = await buildRelatedTermsArray(req.body['relatedterms[]']);
-  /*for(var x = 0; x < req.body['relatedterms[]'].length; x++) {
-    await mindsetphotodefs.find({term: req.body['relatedterms[]'][x]}).exec()
-    .then(term => {
-      if(term[0]){
-        console.log("Found term --> ", term[0].term)
-        var addedrelatedterm = {};
-        var addedrelatedletter = term[0].term.charAt(0).toLowerCase();
-        addedrelatedterm.relatedterm = term[0].term;
-        addedrelatedterm.relatedquick = addedrelatedletter + "/#" + term[0].termquick;
-        console.log("Added this related term --> ",addedrelatedterm);
-        newrelatedterms.push(addedrelatedterm);
-        console.log("New related terms = ",newrelatedterms);
-        //return addedrelatedterm;
-      }
-    })
-    .catch(err => {
-      return res.status(500).send(err);
-      next(err);
-    });
-  }*/
-  console.log("New related terms handed back to [MONGODB] ", newrelatedterms);
   newdictionaryterm = {
     term: req.body.term,
     termquick: req.body.termquick,
@@ -94,7 +72,7 @@ exports.addPhotoTerm = async (req, res) => {
     relatedterms: newrelatedterms,
     lettercategory: req.body.lettercategory
   };
-  console.log("Delivering new term to [MONGODB] = ",newdictionaryterm);
+  console.log("Delivering new term to [MONGODB]");
   const READYPHOTOTERM = new mindsetphotodefs(newdictionaryterm);
   READYPHOTOTERM.save(err => {
     if (err) {
@@ -109,7 +87,6 @@ exports.addPhotoTerm = async (req, res) => {
 exports.editPhotoTerm = async (req, res) => {
   var updatedDictionaryTerm = {};
   var editedRelatedTerms = [];
-  console.log("Working on updated photo term at the server");
   if (typeof req.body['relatedterms[]'] == "string") {
     console.log("Need to change relatedterms to ARRAY");
     req.body['relatedterms[]'] = [req.body['relatedterms[]']]
@@ -123,7 +100,7 @@ exports.editPhotoTerm = async (req, res) => {
     relatedterms: editedRelatedTerms,
     lettercategory: req.body.lettercategory
   }
-  console.log("Here's the updated term ready to go to [MONDGODB] ", updatedDictionaryTerm);
+  console.log("Delivering new term to [MONDGODB]");
   mindsetphotodefs.findByIdAndUpdate({_id: req.body.id},updatedDictionaryTerm, (err, result) => {
     if(err) {
       return res.status(500).send(err);
@@ -131,7 +108,6 @@ exports.editPhotoTerm = async (req, res) => {
       return res.status(202).send({error: false});
     }
   });
-  //console.log(req.body);
 }
 
 exports.deletePhotoTerm = (req, res) => {
@@ -172,17 +148,27 @@ exports.addNewBlog = (req, res) => {
       return res.status(201).send({error: false});
     }
   });
-  /*for(x = 0; x < req.body.content.length;x++) {
-    console.log(req.body.content[x].subheader);
-  }*/
+}
 
-  /*const READYPHOTOTERM = new mindsetphotodefs(newdictionaryterm);
-  READYPHOTOTERM.save(err => {
-    if (err) {
-      console.log(err);
-      return res.status(500).send(err);
-    } else {
-      return res.status(201).send({error: false});
-    }
-  });*/
+exports.getBlogListing = (req, res) => {
+  mindsetblogposts.find().exec()
+  .then(bloglisting => {
+    console.log(bloglisting);
+    res.render('bloglanding',{title: 'BLOG',bloglisting});
+  })
+  .catch(err => {
+    return res.status(500).send(err);
+    next(err);
+  });
+}
+
+exports.addDeleteBlogPost = (req, res) => {
+  mindsetblogposts.findByIdAndRemove(req.params.id).exec()
+  .then(() => {
+    return res.status(202).send({error: false});
+  })
+  .catch(err => {
+    return res.status(500).send(err);
+    next(err);
+  });
 }
