@@ -9,6 +9,10 @@ const postsSubText = new mongoose.Schema({
     type : String,
     required : false
   },
+  'postsubimagecaption' : {
+    type : String,
+    required : false
+  },
   'postsubtext' : {
     type : String,
     required : true
