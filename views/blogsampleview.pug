@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  main
+    section
+      article.blog-article-header.clearfix(style=`background-image: url(${article.postimage})`)
+        .blog-article-headline
+          h2= article.posttitle
+          h4= article.postsummary
+      article.blog-article
+        each p in article.postcontent
+          .blog-article-subsection
+            h5= p.postsubheader
+            if p.postsubimage !== ''
+              img(src=`${p.postsubimage}`)
+            //if p.postsubimage !== ''
+              span.subimage-caption= p.postsubimagecaption
+            p= p.postsubtext
