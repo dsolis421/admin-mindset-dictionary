@@ -2,4 +2,23 @@ extends layout
 
 block content
   main
-    h2 Blog Landing
+    h2 Photography Blog Management
+    each l in bloglisting
+      .blog-landing-listing
+        h4= l.posttitle
+        h5= l.postsummary
+        span= l.postdate.toString().substring(0,15)
+        .blog-post-menu
+          if l.showpost == 'y'
+            span
+              i.fad.fa-toggle-on.fa-lg
+          else
+            span
+              i.fad.fa-toggle-off.fa-lg
+          span.edit-blog-button
+            i.fad.fa-pencil.fa-lg
+          span.delete-blog-button
+            i.fad.fa-trash.fa-lg
+          span.confirm-delete-blog(data-id=`${l._id}`) Confirm
+          span.cancel-delete-blog Cancel
+          
