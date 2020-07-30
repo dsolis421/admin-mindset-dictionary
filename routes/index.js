@@ -21,7 +21,13 @@ router.get('/blog/create', (req, res) => {
   res.render('newblogform', {title: 'CREATE NEW BLOG POST'});
 });
 
+router.get('/blog/edit/:id', dictionaryController.getEditBlog);
+
 router.post('/blog/add', dictionaryController.addNewBlog);
+
+router.post('/blog/update/:id', dictionaryController.editBlogPost);
+
+router.post('/blog/togglepost/:id', dictionaryController.toggleShowPost);
 
 router.post('/blog/delete/:id', dictionaryController.addDeleteBlogPost);
 
