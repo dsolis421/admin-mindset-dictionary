@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  main
+    section.edit-blog-section
+      .edit-blog-menu
+        span.edit-blog-save
+          i.far.fa-save.fa-lg
+        span.edit-blog-cancel
+          i.far.fa-times-square.fa-lg
+        span.edit-blog-addsection
+          i.far.fa-plus-circle.fa-lg
+      form.edit-blog-form(data-id=`${blogpost._id}`)
+        .form-text-input
+          label(for='edit-blog-title') Edit Blog Title
+          br
+          input#edit-blog-title(type='text', name='edit-blog-title', value=`${blogpost.posttitle}`)
+          br
+          label(for='edit-blog-topic') Edit Blog Topic
+          br
+          input#edit-blog-topic(type='text', name='edit-blog-topic', value=`${blogpost.posttopic}`)
+          br
+          label(for='edit-blog-summary') Edit Blog Summary
+          br
+          input#edit-blog-summary(type='text', name='edit-blog-summary', value=`${blogpost.postsummary}`)
+          br
+          label(for='edit-blog-image') Edit Blog Main Image Link
+          br
+          input#edit-blog-image(type='text', name='edit-blog-image', value=`${blogpost.postimage}`)
+          br
+          label(for='edit-blog-tnail') Edit Blog Thumbnail Link
+          br
+          input#edit-blog-tnail(type='text', name='edit-blog-tnail', value=`${blogpost.posttnail}`)
+        each c in blogpost.postcontent
+          .form-textarea-input
+            h4 Edit Blog Content
+            input#edit-blog-subheader(type='text', name='edit-blog-subheader', placeholder='Subsection Header', value=`${c.postsubheader}`)
+            br
+            input#edit-blog-subimage(type='text', name='edit-blog-subimage', placeholder='Subsection Image Link', value=`${c.postsubimage}`) 
+            br
+            textarea#edit-blog-subtext(type='text', name='edit-blog-subtext', placeholder='Subsection Text')= c.postsubtext
+            br
+            input#edit-blog-suborder(type='number', name='edit-blog-suborder', placeholder='#', value=`${c.postsuborder}`) 
+            br
+            br
+              
+          
