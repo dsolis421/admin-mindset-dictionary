@@ -54,6 +54,20 @@ function postNewBlog(newblog) {
   });
 }
 
+function postUpdatedBlog(blogupdate) {
+  $.post("/blog/update/" + blogupdate.id, blogupdate, function(data,status,xhr){
+    if(status == "success") {
+      //clearFormValues();
+      alert("Updated blog post!");
+      $(".response-message-container").html('<span class="new-term-good">New Term Added to Dictionary</span>')
+    } else if (status == "error") {
+      $(".response-message-container").html('<span class="new-term-bad">A Server Error Occured, Could Not Insert New Term</span>');
+    } else if (status == "timeout") {
+      $(".response-message-container").html('<span class="new-term-bad">A Timeout Error Occured, Check Your Connetion and Try Again</span>');
+    }
+  });
+}
+
 function buildNewTerm() {
   var newtermdata = {};
   var $lettercategory = $('#new-dictionary-term').val().charAt(0).toLowerCase();
@@ -108,6 +122,36 @@ function buildNewBlog() {
   $newblogdata.content = JSON.stringify($newblogcontent);
   console.log($newblogdata);
   postNewBlog($newblogdata);
+}
+
+function buildUpdatedBlog() {
+  console.log('Updating blog post');
+  var $updatedblogdata = {};
+  var $updatedblogcontent = [];
+  $('.form-textarea-input').each(function(){
+    var $subcontent = {};
+    $subcontent.postsubheader = jQuery(this).find('#edit-blog-subheader').val();
+    $subcontent.postsubimage = jQuery(this).find('#edit-blog-subimage').val();
+    $subcontent.postsubtext = jQuery(this).find('#edit-blog-subtext').val();
+    $subcontent.postsuborder = jQuery(this).find('#edit-blog-suborder').val();
+    console.log("Adding subcontent " + $subcontent);
+    $updatedblogcontent.push($subcontent);
+  });
+  $updatedblogdata.id = $('.edit-blog-form').attr('data-id');
+  $updatedblogdata.title = $('#edit-blog-title').val();
+  $updatedblogdata.topic = $('#edit-blog-topic').val();
+  $updatedblogdata.summary = $('#edit-blog-summary').val();
+  $updatedblogdata.image = $('#edit-blog-image').val();
+  $updatedblogdata.tnail = $('#edit-blog-tnail').val();;
+  $updatedblogdata.content = JSON.stringify($updatedblogcontent);
+  console.log($updatedblogdata);
+  postUpdatedBlog($updatedblogdata);
+}
+
+function toggleShowPost(post) {
+  $.post("/blog/togglepost/" + post.id, post, function(data,status,xhr){
+    console.log(status);
+  });
 }
 
 function arrangeEditTerm(editterm) {
@@ -250,5 +294,35 @@ $(document).ready(function(){
       <textarea id="new-blog-subtext" type="text" name="new-blog-subtext" placeholder="Subsection Text"></textarea><br>\
       <input id="new-blog-suborder" type="number" name="new-blog-suborder" placeholder="#"></input><br><br>\
       </div>')
+  });
+
+  $('.edit-blog-button').click(function() {
+    console.log('editing a blog');
+    var $id = $(this).attr('data-id')
+    var $quick = "/blog/edit/" + $id;
+    window.location.href = $quick;
+  });
+
+  $('.edit-blog-save').click(function() {
+    console.log('saving an updated blog');
+    buildUpdatedBlog();
+  });
+
+  $('.show-post-toggle').click(function() {
+    var show = {
+      id : $(this).attr('data-id'),
+      showpost : $(this).attr('data-switchto')
+    }
+    console.log('toggle post to ' + show.showpost);
+    if($(this).attr('data-switchto') == 'n') {
+      $(this).attr('data-switchto','y');
+      $(this).html('<i class="fad fa-toggle-off fa-lg"></i>');
+      console.log("toggled off");
+    } else {
+      $(this).attr('data-switchto','n');
+      $(this).html('<i class="fad fa-toggle-on fa-lg"></i>');
+      console.log("toggled on");
+    }
+    toggleShowPost(show);
   });
 });
