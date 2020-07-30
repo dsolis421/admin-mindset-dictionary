@@ -172,12 +172,15 @@ li {
 }
 
 .blog-landing-listing {
+  border: 2px solid #462310;
   height: auto;
   width: 600px;
-  margin-top: 20px;
+  padding: 10px;
+  margin: 20px auto;
 }
 
-.new-blog-menu {
+.new-blog-menu,
+.edit-blog-menu {
   width: 20%;
   height: auto;
   position: fixed;
@@ -188,7 +191,9 @@ li {
 }
 
 .blog-post-menu span {
+  cursor: pointer;
   margin-right: 20px;
+  overflow: hidden;
 }
 
 .fa-toggle-on {
@@ -196,11 +201,11 @@ li {
 }
 
 .mindset-dictionary-selector {
-  display: inline-block;
-  margin: 20px 0;
+  margin: 20px auto;
   text-align: center;
 }
 
+.new-blog-button,
 .new-term-button {
   background: #E0763D;
   color: #fff;
@@ -212,10 +217,14 @@ li {
   margin: 20px auto;
 }
 
+.new-blog-button
 .blog-post-menu,
 .new-blog-save,
 .new-blog-cancel,
 .new-blog-addsection,
+.edit-blog-save,
+.edit-blog-cancel,
+.edit-blog-addsection,
 .new-term-submit,
 .new-term-cancel,
 .new-term-button ,
@@ -225,6 +234,7 @@ li {
   font-weight: bold;
 }
 
+.new-blog-button span:first-of-type,
 .new-term-button span:first-of-type {
   margin-right: 10px;
 }
@@ -237,6 +247,8 @@ li {
   width: 100%;
 }
 
+.blog-listing-container,
+.mindset-dictionary-menu,
 .edit-form-buttons,
 .new-term-form,
 .edit-term-form {
@@ -269,6 +281,9 @@ li {
 .new-blog-save,
 .new-blog-cancel,
 .new-blog-addsection,
+.edit-blog-save,
+.edit-blog-cancel,
+.edit-blog-addsection,
 .edit-term-submit,
 .edit-term-cancel,
 .new-term-submit,
@@ -283,18 +298,21 @@ li {
 }
 
 .new-blog-save,
+.edit-blog-save,
 .edit-term-submit,
 .new-term-submit {
   background: #79d2a6;
 }
 
 .new-blog-cancel,
+.edit-blog-cancel,
 .edit-term-cancel,
 .new-term-cancel {
   background: #ff8080;
 }
 
-.new-blog-addsection {
+.new-blog-addsection,
+.edit-blog-addsection {
   border: 1px solid #462310;
 }
 
