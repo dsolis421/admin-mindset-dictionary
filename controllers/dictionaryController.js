@@ -56,6 +56,19 @@ exports.getDictionaryLetter = (req, res) => {
   });
 }
 
+exports.getEditBlog = (req, res) => {
+  mindsetblogposts.find({_id: req.params.id}).exec()
+  .then(editpost => {
+    //console.log(editpost);
+    var blogpost = editpost[0];
+    console.log(blogpost)
+    res.render('editblogform', {title: 'EDIT BLOG', blogpost});
+  })
+  .catch(err => {
+    next(err);
+  });
+}
+
 exports.addPhotoTerm = async (req, res) => {
   var newdictionaryterm = {};
   var newrelatedterms = [];
@@ -151,7 +164,7 @@ exports.addNewBlog = (req, res) => {
 }
 
 exports.getBlogListing = (req, res) => {
-  mindsetblogposts.find().exec()
+  mindsetblogposts.find().sort({postdate: -1}).exec()
   .then(bloglisting => {
     console.log(bloglisting);
     res.render('bloglanding',{title: 'BLOG',bloglisting});
@@ -161,6 +174,46 @@ exports.getBlogListing = (req, res) => {
     next(err);
   });
 }
+
+exports.editBlogPost = (req, res) => {
+  console.log("Made it to the server", req.body);
+  var newdate = new Date();
+  var newquick = req.body.title.toLowerCase().replace(/ /g,"-");
+  var updatedBlogPost = {};
+  var newcontent = JSON.parse(req.body.content);
+  updatedBlogPost = {
+    posttitle : req.body.title,
+    posttopic : req.body.topic,
+    postdate : newdate,
+    postquick : newquick,
+    postsummary : req.body.summary,
+    postcontent : newcontent,
+    postimage : req.body.image,
+    posttnail : req.body.tnail,
+  };
+  console.log("Delivering new blog to [MONDGODB]");
+  console.log(updatedBlogPost);
+  mindsetblogposts.findByIdAndUpdate({_id: req.body.id},updatedBlogPost, (err, result) => {
+    if(err) {
+      return res.status(500).send(err);
+    } else {
+      return res.status(202).send({error: false});
+    }
+  });
+}
+
+exports.toggleShowPost = (req, res) => {
+  mindsetblogposts.findByIdAndUpdate(req.params.id,
+    {$set :   {showpost : req.body.showpost}}, (err, post) => {
+      if (err) {
+        return res.status(500).send(err);
+        next(err);
+      } else {
+        return res.status(202).send({error: false});
+      }
+    }
+  )
+};
 
 exports.addDeleteBlogPost = (req, res) => {
   mindsetblogposts.findByIdAndRemove(req.params.id).exec()
