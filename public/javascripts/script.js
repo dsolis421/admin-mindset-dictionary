@@ -138,6 +138,14 @@ function deletePhotoTerm(id) {
   });
 }
 
+function deleteBlogPost(id) {
+  $.post("/blog/delete/" + id,function(data,status,xhr){
+    if(status == "success") {
+      location.reload(true);
+    }
+  });
+}
+
 $(document).ready(function(){
   //clearFormValues();
 
@@ -209,6 +217,24 @@ $(document).ready(function(){
     console.log('canceling edit term');
     clearFormValues();
     $('.edit-term-container').fadeOut();
+  });
+
+  $('.delete-blog-button').click(function() {
+    console.log('deleting a blog');
+    $(this).siblings(".confirm-delete-blog, .cancel-delete-blog").animate({width: "100px"},"slow","swing");
+  });
+
+  $('.cancel-delete-blog').click(function() {
+    console.log('cancel delete blog');
+    $(this).siblings(".confirm-delete-blog").animate({width: "0px"},"slow","swing");
+    $(this).animate({width: "0px"},"slow","swing");
+  });
+
+  $('.confirm-delete-blog').click(function() {
+    console.log('confirm delete a blog');
+    var $deleteid = $(this).attr('data-id');
+    deleteBlogPost($deleteid);
+    var $deleteid = '';
   });
 
   $('.new-blog-save').click(function() {
