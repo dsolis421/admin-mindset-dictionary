@@ -138,7 +138,14 @@ li {
   line-height: 80px;
   text-align: center;
   margin: 30px auto;
+  padding: 3px;
   width: 600px;
+}
+
+.landing-menu-section a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
 }
 
 #letter {
@@ -148,14 +155,50 @@ li {
   margin-left: 20px;
 }
 
-.mindset-dictionary-selector {
+.header-title-container a {
   display: inline-block;
-  margin-left: 80px;
-  text-align: center;
+  height: 40px;
+  font-size: 30px;
+  margin-right: 30px;
+  text-decoration: none;
 }
 
-.header-title-container a {
-  font-size: 30px;
+.header-title-container a:not(:first-of-type) {
+  background: #5DA4C1;
+  color: #fff;
+  border-radius: 30px;
+  padding: 0 15px;
+  width: auto;
+}
+
+.blog-landing-listing {
+  height: auto;
+  width: 600px;
+  margin-top: 20px;
+}
+
+.new-blog-menu {
+  width: 20%;
+  height: auto;
+  position: fixed;
+}
+
+.blog-post-menu {
+  margin-top: 15px;
+}
+
+.blog-post-menu span {
+  margin-right: 20px;
+}
+
+.fa-toggle-on {
+  color: #5DA4C1;
+}
+
+.mindset-dictionary-selector {
+  display: inline-block;
+  margin: 20px 0;
+  text-align: center;
 }
 
 .new-term-button {
@@ -169,18 +212,13 @@ li {
   margin: 20px auto;
 }
 
-.new-blog-menu {
-  width: 20%;
-  height: auto;
-  position: fixed;
-}
-
+.blog-post-menu,
 .new-blog-save,
 .new-blog-cancel,
 .new-blog-addsection,
 .new-term-submit,
 .new-term-cancel,
-.new-term-button span,
+.new-term-button ,
 .edit-term-submit,
 .edit-term-cancel {
   font-size: 20px;
@@ -287,6 +325,8 @@ li {
   display: inline-block;
 }
 
+.cancel-delete-blog,
+.confirm-delete-blog,
 .edit-photo-term,
 .delete-photo-term,
 .confirm-delete-term,
@@ -295,7 +335,6 @@ li {
   cursor: pointer;
   height: 30px;
   line-height: 30px;
-  width: 100px;
   text-align: center;
 }
 
@@ -310,6 +349,8 @@ li {
   z-index: 100;
 }
 
+.cancel-delete-blog,
+.confirm-delete-blog,
 .confirm-delete-term,
 .cancel-delete-term {
   background: #ffcc00;
@@ -321,11 +362,13 @@ li {
   background: #79d2a6;
   color: #206020;
   margin: 0 20px;
+  width: 100px;
 }
 
 .delete-photo-term {
   background: #ff8080;
   color: #660000;
+  width: 100px;
 }
 
 @media screen and (max-width: 1200px) {
