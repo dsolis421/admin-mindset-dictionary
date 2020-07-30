@@ -11,9 +11,7 @@ router.get('/dictionary', function(req, res, next) {
   res.render('dictionarylanding', {title: 'DICTIONARY'});
 });
 
-router.get('/blog', function(req, res, next) {
-  res.render('bloglanding', {title: 'BLOG'});
-});
+router.get('/blog', dictionaryController.getBlogListing);
 
 router.get('/dictionary/:letter', dictionaryController.getDictionaryLetter);
 
@@ -24,6 +22,8 @@ router.get('/blog/create', (req, res) => {
 });
 
 router.post('/blog/add', dictionaryController.addNewBlog);
+
+router.post('/blog/delete/:id', dictionaryController.addDeleteBlogPost);
 
 router.post('/dictionary/delete/:id', dictionaryController.deletePhotoTerm);
 
