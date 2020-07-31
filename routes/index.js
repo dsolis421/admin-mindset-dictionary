@@ -17,6 +17,8 @@ router.get('/dictionary/:letter', dictionaryController.getDictionaryLetter);
 
 router.post('/dictionary/add', dictionaryController.addPhotoTerm);
 
+router.get('/blog/:blogquick', dictionaryController.getBlogPost);
+
 router.get('/blog/create', (req, res) => {
   res.render('newblogform', {title: 'CREATE NEW BLOG POST'});
 });

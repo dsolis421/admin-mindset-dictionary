@@ -175,6 +175,17 @@ exports.getBlogListing = (req, res) => {
   });
 }
 
+exports.getBlogPost = (req, res) => {
+  mindsetblogposts.find({postquick:req.params.blogquick}).exec()
+  .then(blogpost => {
+    var article = blogpost[0];
+    res.render('blogsampleview',{title: 'BLOG PREVIEW',article});
+  })
+  .catch(err => {
+    next(err);
+  });
+}
+
 exports.editBlogPost = (req, res) => {
   console.log("Made it to the server", req.body);
   var newdate = new Date();
