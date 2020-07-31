@@ -15,7 +15,7 @@ router.get('/blog', dictionaryController.getBlogListing);
 
 router.get('/dictionary/:letter', dictionaryController.getDictionaryLetter);
 
-router.get('/blog/:blogquick', dictionaryController.getBlogPost);
+router.get('/blog/preview/:blogquick', dictionaryController.getBlogPost);
 
 router.get('/blog/create', (req, res) => {
   console.log('going to blog create');
