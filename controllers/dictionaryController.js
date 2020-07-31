@@ -166,7 +166,6 @@ exports.addNewBlog = (req, res) => {
 exports.getBlogListing = (req, res) => {
   mindsetblogposts.find().sort({postdate: -1}).exec()
   .then(bloglisting => {
-    console.log(bloglisting);
     res.render('bloglanding',{title: 'BLOG',bloglisting});
   })
   .catch(err => {
@@ -188,14 +187,14 @@ exports.getBlogPost = (req, res) => {
 
 exports.editBlogPost = (req, res) => {
   console.log("Made it to the server", req.body);
-  var newdate = new Date();
+  //var newdate = new Date();
   var newquick = req.body.title.toLowerCase().replace(/ /g,"-");
   var updatedBlogPost = {};
   var newcontent = JSON.parse(req.body.content);
   updatedBlogPost = {
     posttitle : req.body.title,
     posttopic : req.body.topic,
-    postdate : newdate,
+    //postdate : newdate,
     postquick : newquick,
     postsummary : req.body.summary,
     postcontent : newcontent,
@@ -215,7 +214,8 @@ exports.editBlogPost = (req, res) => {
 
 exports.toggleShowPost = (req, res) => {
   mindsetblogposts.findByIdAndUpdate(req.params.id,
-    {$set :   {showpost : req.body.showpost}}, (err, post) => {
+    {showpost : req.body.showpost}, (err, post) => {
+    //{$set :   {showpost : req.body.showpost}}, (err, post) => {
       if (err) {
         return res.status(500).send(err);
         next(err);
