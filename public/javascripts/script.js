@@ -133,7 +133,7 @@ function buildUpdatedBlog() {
     var $subcontent = {};
     $subcontent.postsubheader = jQuery(this).find('#edit-blog-subheader').val();
     $subcontent.postsubimage = jQuery(this).find('#edit-blog-subimage').val();
-    $subcontent.postsubimagecaption = jQuery(this).find('#new-blog-subimagecaption').val();
+    $subcontent.postsubimagecaption = jQuery(this).find('#edit-blog-subimagecaption').val();
     $subcontent.postsubtext = jQuery(this).find('#edit-blog-subtext').val();
     $subcontent.postsuborder = jQuery(this).find('#edit-blog-suborder').val();
     console.log("Adding subcontent " + $subcontent);
@@ -193,7 +193,7 @@ function deleteBlogPost(id) {
 }
 
 $(document).ready(function(){
-  //clearFormValues();
+  clearFormValues();
 
   $('#letter').change(function() {
     var $letter = $('#letter').val()
