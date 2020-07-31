@@ -33,6 +33,19 @@ time, mark, audio, video {
     vertical-align: baseline;
 }
 
+/*Remove number scrolls Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/*Remove number scrolls Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  width: 50px;
+}
+
 body {
   text-align: left;
   color: #462310;
@@ -235,6 +248,13 @@ li {
   margin: 0px auto;
 }
 
+.blog-article-subsection span {
+  display: block;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
 .mindset-dictionary-selector {
   margin: 20px auto;
   text-align: center;
@@ -301,7 +321,7 @@ li {
 }
 
 .form-text-input input,
-.form-textarea-input input:not(#new-blog-suborder) {
+.form-textarea-input input:not([type='number']) {
   width: 90%;
 }
 
