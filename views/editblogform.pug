@@ -31,6 +31,7 @@ block content
           label(for='edit-blog-tnail') Edit Blog Thumbnail Link
           br
           input#edit-blog-tnail(type='text', name='edit-blog-tnail', value=`${blogpost.posttnail}`)
+        - blogpost.postcontent.sort(function(a, b) {return a.postsuborder - b.postsuborder;})
         each c in blogpost.postcontent
           .form-textarea-input
             h4 Edit Blog Content
