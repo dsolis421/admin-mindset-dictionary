@@ -15,11 +15,10 @@ router.get('/blog', dictionaryController.getBlogListing);
 
 router.get('/dictionary/:letter', dictionaryController.getDictionaryLetter);
 
-router.post('/dictionary/add', dictionaryController.addPhotoTerm);
-
-router.get('/blog/:blogquick', dictionaryController.getBlogPost);
+router.get('/blog/preview/:blogquick', dictionaryController.getBlogPost);
 
 router.get('/blog/create', (req, res) => {
+  console.log('going to blog create');
   res.render('newblogform', {title: 'CREATE NEW BLOG POST'});
 });
 
@@ -32,6 +31,8 @@ router.post('/blog/update/:id', dictionaryController.editBlogPost);
 router.post('/blog/togglepost/:id', dictionaryController.toggleShowPost);
 
 router.post('/blog/delete/:id', dictionaryController.addDeleteBlogPost);
+
+router.post('/dictionary/add', dictionaryController.addPhotoTerm);
 
 router.post('/dictionary/delete/:id', dictionaryController.deletePhotoTerm);
 

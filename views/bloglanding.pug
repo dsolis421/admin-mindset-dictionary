@@ -10,7 +10,7 @@ block content
     section.blog-listing-container
       each l in bloglisting
         .blog-landing-listing
-          a.blog-post-preview(href=`/blog/${l.postquick}`)
+          a.blog-post-preview(href=`/blog/preview/${l.postquick}`)
             i.fad.fa-eye.fa-lg
           h4= l.posttitle
           h5= l.postsummary
