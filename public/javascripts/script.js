@@ -214,9 +214,12 @@ $(document).ready(function(){
   });
 
   $('.new-term-cancel').click(function() {
-    console.log('adding a new term');
-    clearFormValues();
-    $('.new-term-container').animate({height: "0px"},"slow","swing");
+    console.log('canceling a new term');
+    var cancel = confirm('You want to cancel this edit? Changes will be lost...');
+    if(cancel) {
+      clearFormValues();
+      $('.new-term-container').animate({height: "0px"},"slow","swing");
+    }
   });
 
   $('.delete-photo-term').click(function() {
@@ -261,8 +264,11 @@ $(document).ready(function(){
 
   $('.edit-term-cancel').click(function() {
     console.log('canceling edit term');
-    clearFormValues();
-    $('.edit-term-container').fadeOut();
+    var cancel = confirm('You want to cancel this edit? Changes will be lost...');
+    if(cancel) {
+      clearFormValues();
+      $('.edit-term-container').fadeOut();
+    }
   });
 
   $('.delete-blog-button').click(function() {
@@ -287,6 +293,15 @@ $(document).ready(function(){
     console.log('adding a new term');
     window.location.href = '/blog/create';
     clearFormValues();
+  });
+
+  $('.new-blog-cancel').click(function() {
+    console.log('canceling a new blog');
+    var cancel = confirm('You want to cancel this new blog? Changes will be lost...');
+    if(cancel) {
+      clearFormValues();
+      window.location.href = '/blog';
+    }
   });
 
   $('.new-blog-save').click(function() {
@@ -314,6 +329,15 @@ $(document).ready(function(){
   $('.edit-blog-save').click(function() {
     console.log('saving an updated blog');
     buildUpdatedBlog();
+  });
+
+  $('.edit-blog-cancel').click(function() {
+    console.log('canceling a blog edit');
+    var cancel = confirm('You want to cancel this blog edit? Changes will be lost...');
+    if(cancel) {
+      clearFormValues();
+      window.location.href = '/blog';
+    }
   });
 
   $('input#edit-blog-suborder').change(function() {
