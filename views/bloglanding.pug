@@ -3,10 +3,11 @@ extends layout
 block content
   main
     h2 Photography Blog Management
-    .new-blog-button#add-new-blog
-      span
-        i.far.fa-plus-circle
-      span Add New Blog
+    a(href='/blog/create')
+      .new-blog-button#add-new-blog
+        span
+          i.far.fa-plus-circle
+        span Add New Blog
     section.blog-listing-container
       each l in bloglisting
         .blog-landing-listing
