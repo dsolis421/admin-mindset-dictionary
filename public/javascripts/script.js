@@ -109,6 +109,7 @@ function buildNewBlog() {
     var $subcontent = {};
     $subcontent.postsubheader = jQuery(this).find('#new-blog-subheader').val();
     $subcontent.postsubimage = jQuery(this).find('#new-blog-subimage').val();
+    $subcontent.postsubimagecaption = jQuery(this).find('#new-blog-subimagecaption').val();
     $subcontent.postsubtext = jQuery(this).find('#new-blog-subtext').val();
     $subcontent.postsuborder = jQuery(this).find('#new-blog-suborder').val();
     console.log("Adding subcontent " + $subcontent);
@@ -132,6 +133,7 @@ function buildUpdatedBlog() {
     var $subcontent = {};
     $subcontent.postsubheader = jQuery(this).find('#edit-blog-subheader').val();
     $subcontent.postsubimage = jQuery(this).find('#edit-blog-subimage').val();
+    $subcontent.postsubimagecaption = jQuery(this).find('#new-blog-subimagecaption').val();
     $subcontent.postsubtext = jQuery(this).find('#edit-blog-subtext').val();
     $subcontent.postsuborder = jQuery(this).find('#edit-blog-suborder').val();
     console.log("Adding subcontent " + $subcontent);
@@ -306,6 +308,18 @@ $(document).ready(function(){
   $('.edit-blog-save').click(function() {
     console.log('saving an updated blog');
     buildUpdatedBlog();
+  });
+
+  $('input#edit-blog-suborder').change(function() {
+    console.log('updating suborder');
+    var order = $(this).val();
+    $('input#edit-blog-suborder').not(this).each(function(){
+      if($(this).val() >= order) {
+        var setorder = parseInt($(this).val()) + 1;
+        console.log('this order needs an update');
+        $(this).val(setorder);
+      }
+    });
   });
 
   $('.show-post-toggle').click(function() {
