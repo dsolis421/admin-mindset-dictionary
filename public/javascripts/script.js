@@ -193,7 +193,7 @@ function deleteBlogPost(id) {
 }
 
 $(document).ready(function(){
-  clearFormValues();
+  //clearFormValues();
 
   $('#letter').change(function() {
     var $letter = $('#letter').val()
@@ -283,6 +283,12 @@ $(document).ready(function(){
     var $deleteid = '';
   });
 
+  $('#add-new-blog').click(function() {
+    console.log('adding a new term');
+    window.location.href = '/blog/create';
+    clearFormValues();
+  });
+
   $('.new-blog-save').click(function() {
     console.log('saving new blog');
     buildNewBlog();
@@ -311,12 +317,12 @@ $(document).ready(function(){
   });
 
   $('input#edit-blog-suborder').change(function() {
-    console.log('updating suborder');
+    //onsole.log('updating suborder');
     var order = $(this).val();
     $('input#edit-blog-suborder').not(this).each(function(){
       if($(this).val() >= order) {
         var setorder = parseInt($(this).val()) + 1;
-        console.log('this order needs an update');
+        //console.log('this order needs an update');
         $(this).val(setorder);
       }
     });
