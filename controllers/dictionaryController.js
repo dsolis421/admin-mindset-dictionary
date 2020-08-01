@@ -215,7 +215,6 @@ exports.editBlogPost = (req, res) => {
 exports.toggleShowPost = (req, res) => {
   mindsetblogposts.findByIdAndUpdate(req.params.id,
     {showpost : req.body.showpost}, (err, post) => {
-    //{$set :   {showpost : req.body.showpost}}, (err, post) => {
       if (err) {
         return res.status(500).send(err);
         next(err);
@@ -245,7 +244,6 @@ exports.postSearchBlog = async (req, res) => {
   .exec()
   .then(bloglisting => {
     console.log('No errors from [MONGODB] ', bloglisting);
-    //res.render('blogsearchresults',{title: 'BLOG SEARCH',bloglisting});
     res.status(200).send(bloglisting);
   })
   .catch(err => {
@@ -253,13 +251,4 @@ exports.postSearchBlog = async (req, res) => {
     return res.status(500).send(err);
     next(err);
   })
-  /*.exec((err,data) => {
-    if(err) {
-      return res.status(500).send(err);
-      next(err);
-    } else {
-      console.log('No errors from [MONGODB] ', data);
-      return res.status(202).send(data);
-    }
-  })*/
 }
