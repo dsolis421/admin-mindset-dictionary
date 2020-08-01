@@ -3,11 +3,16 @@ extends layout
 block content
   main
     h2 Photography Blog Management
+    .blog-search-container
+      .form-text-input
+        input#blog-search-input(type='text', name='blog-search-input', placeholder="Search Blog")
+        span.blog-search-button
+          i.fad.fa-search
     .new-blog-button#add-new-blog
       span
         i.far.fa-plus-circle
       span Add New Blog
-    section.blog-listing-container
+    section.blog-listing-container#blog-search-results
       each l in bloglisting
         .blog-landing-listing
           a.blog-post-preview(href=`/blog/preview/${l.postquick}`)
