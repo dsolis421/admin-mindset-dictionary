@@ -32,6 +32,8 @@ router.post('/blog/togglepost/:id', dictionaryController.toggleShowPost);
 
 router.post('/blog/delete/:id', dictionaryController.addDeleteBlogPost);
 
+router.post('/blog/search/', dictionaryController.postSearchBlog);
+
 router.post('/dictionary/add', dictionaryController.addPhotoTerm);
 
 router.post('/dictionary/delete/:id', dictionaryController.deletePhotoTerm);
