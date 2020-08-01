@@ -31,10 +31,11 @@ block content
           label(for='edit-blog-tnail') Edit Blog Thumbnail Link
           br
           input#edit-blog-tnail(type='text', name='edit-blog-tnail', value=`${blogpost.posttnail}`)
+          br
+          h4 Edit Blog Content
         - blogpost.postcontent.sort(function(a, b) {return a.postsuborder - b.postsuborder;})
         each c in blogpost.postcontent
           .form-textarea-input
-            h4 Edit Blog Content
             input#edit-blog-subheader(type='text', name='edit-blog-subheader', placeholder='Subsection Header', value=`${c.postsubheader}`)
             br
             input#edit-blog-subimage(type='text', name='edit-blog-subimage', placeholder='Subsection Image Link', value=`${c.postsubimage}`) 
