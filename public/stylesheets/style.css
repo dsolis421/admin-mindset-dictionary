@@ -259,10 +259,9 @@ span.blog-search-button {
 
 .blog-article-subsection img {
   display: block;
-  width: 90%;
+  width: auto;
   max-width: 600px;
   height: auto;
-  max-height: 400px;
   margin: 0px auto;
 }
 
