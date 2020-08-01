@@ -184,12 +184,30 @@ li {
   width: auto;
 }
 
+.blog-search-container .form-text-input input {
+  border-right: none;
+  border-radius: 10px 0px 0px 10px;
+}
+
 .blog-landing-listing {
   border: 2px solid #462310;
   height: auto;
   width: 600px;
   padding: 10px;
   margin: 20px auto;
+}
+
+span.blog-search-button {
+  background: #E0763D;
+  border: 1px solid #ccc;
+  border-radius: 0px 10px 10px 0px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  width: 50px;
+  text-align: center;
 }
 
 .blog-post-preview {
