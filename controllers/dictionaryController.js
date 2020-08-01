@@ -224,7 +224,7 @@ exports.toggleShowPost = (req, res) => {
       }
     }
   )
-};
+}
 
 exports.addDeleteBlogPost = (req, res) => {
   mindsetblogposts.findByIdAndRemove(req.params.id).exec()
@@ -235,4 +235,31 @@ exports.addDeleteBlogPost = (req, res) => {
     return res.status(500).send(err);
     next(err);
   });
+}
+
+exports.postSearchBlog = async (req, res) => {
+  console.log('searching for ---> ',req.body.text);
+  await mindsetblogposts.find({$text: {$search: req.body.text}})
+  /*.skip(20)
+  .limit(10)*/
+  .exec()
+  .then(bloglisting => {
+    console.log('No errors from [MONGODB] ', bloglisting);
+    //res.render('blogsearchresults',{title: 'BLOG SEARCH',bloglisting});
+    res.status(200).send(bloglisting);
+  })
+  .catch(err => {
+    console.log(err);
+    return res.status(500).send(err);
+    next(err);
+  })
+  /*.exec((err,data) => {
+    if(err) {
+      return res.status(500).send(err);
+      next(err);
+    } else {
+      console.log('No errors from [MONGODB] ', data);
+      return res.status(202).send(data);
+    }
+  })*/
 }
