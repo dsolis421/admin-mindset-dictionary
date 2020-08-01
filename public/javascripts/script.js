@@ -1,3 +1,48 @@
+function setBlogHandlers() {
+  $('.delete-blog-button').click(function() {
+    console.log('deleting a blog');
+    $(this).siblings(".confirm-delete-blog, .cancel-delete-blog").animate({width: "100px"},"slow","swing");
+  });
+
+  $('.cancel-delete-blog').click(function() {
+    console.log('cancel delete blog');
+    $(this).siblings(".confirm-delete-blog").animate({width: "0px"},"slow","swing");
+    $(this).animate({width: "0px"},"slow","swing");
+  });
+
+  $('.confirm-delete-blog').click(function() {
+    console.log('confirm delete a blog');
+    var $deleteid = $(this).attr('data-id');
+    deleteBlogPost($deleteid);
+    var $deleteid = '';
+  });
+
+  $('.edit-blog-button').click(function() {
+    console.log('editing a blog');
+    var $id = $(this).attr('data-id')
+    var $quick = "/blog/edit/" + $id;
+    window.location.href = $quick;
+  });
+
+  $('.show-post-toggle').click(function() {
+    var show = {
+      id : $(this).attr('data-id'),
+      showpost : $(this).attr('data-switchto')
+    }
+    console.log('toggle post to ' + show.showpost);
+    if($(this).attr('data-switchto') == 'n') {
+      $(this).attr('data-switchto','y');
+      $(this).html('<i class="fad fa-toggle-off fa-lg"></i>');
+      console.log("toggled off");
+    } else {
+      $(this).attr('data-switchto','n');
+      $(this).html('<i class="fad fa-toggle-on fa-lg"></i>');
+      console.log("toggled on");
+    }
+    toggleShowPost(show);
+  });
+}
+
 function expandNewTermForm() {
   $('.new-term-container').animate({height: "400px"},"slow","swing");
 }
@@ -192,8 +237,53 @@ function deleteBlogPost(id) {
   });
 }
 
+function sendBlogSearch(text) {
+  var searchfor = {};
+  searchfor.text = text;
+  $.post("/blog/search/",searchfor,function(data, status, xhr){
+    console.log(data);
+    /*$("#blog-search-results").load(document.URL+" #blog-search-results>*", function() {
+      setBlogHandlers();
+    });*/
+    $('#blog-search-results').empty();
+    var resultcount = data.length;
+    if(resultcount == 0){
+      $('#blog-search-results').append('<div class="blog-landing-listing">\
+        <h4>No Results Found</h4></div>')
+    } else {
+      for (x=0; x < resultcount; x++) {
+        var togglesetting = '';
+        var formatteddate = '';
+        if(data[x].showpost == 'y') {
+          togglesetting = '<span class="show-post-toggle" data-id="'+data[x]._id+'" data-switchto="n">\
+          <i class="fad fa-toggle-on fa-lg"></i></span>'
+        } else {
+          togglesetting = '<span class="show-post-toggle" data-id="'+data[x]._id+'" data-switchto="y">\
+          <i class="fad fa-toggle-off fa-lg"></i></span>'
+        };
+        formatteddate = data[x].postdate;
+        $('#blog-search-results').append('<div class="blog-landing-listing">\
+          <a class="blog-post-preview" href="/blog/preview/'+data[x].postquick+'">\
+          <i class="fad fa-eye fa-lg"></i></a>\
+          <h4>'+data[x].posttitle+'</h4>\
+          <h5>'+data[x].postsummary+'</h5>\
+          <span>'+formatteddate+'</span>\
+          <div class="blog-post-menu">'+togglesetting+'\
+          <span class="edit-blog-button" data-id="'+data[x]._id+'">\
+          <i class="fad fa-pencil fa-lg"></i></span>\
+          <span class="delete-blog-button">\
+          <i class="fad fa-trash fa-lg"></i></span>\
+          <span class="confirm-delete-blog" data-id="'+data[x]._id+'">Confirm</span>\
+          <span class="cancel-delete-blog">Cancel</span></div></div>')
+      }
+    }
+    setBlogHandlers();
+  });
+}
+
 $(document).ready(function(){
   //clearFormValues();
+  setBlogHandlers();
 
   $('#letter').change(function() {
     var $letter = $('#letter').val()
@@ -271,26 +361,8 @@ $(document).ready(function(){
     }
   });
 
-  $('.delete-blog-button').click(function() {
-    console.log('deleting a blog');
-    $(this).siblings(".confirm-delete-blog, .cancel-delete-blog").animate({width: "100px"},"slow","swing");
-  });
-
-  $('.cancel-delete-blog').click(function() {
-    console.log('cancel delete blog');
-    $(this).siblings(".confirm-delete-blog").animate({width: "0px"},"slow","swing");
-    $(this).animate({width: "0px"},"slow","swing");
-  });
-
-  $('.confirm-delete-blog').click(function() {
-    console.log('confirm delete a blog');
-    var $deleteid = $(this).attr('data-id');
-    deleteBlogPost($deleteid);
-    var $deleteid = '';
-  });
-
   $('#add-new-blog').click(function() {
-    console.log('adding a new term');
+    console.log('adding a new blog');
     window.location.href = '/blog/create';
     clearFormValues();
   });
@@ -319,13 +391,6 @@ $(document).ready(function(){
       </div>')
   });
 
-  $('.edit-blog-button').click(function() {
-    console.log('editing a blog');
-    var $id = $(this).attr('data-id')
-    var $quick = "/blog/edit/" + $id;
-    window.location.href = $quick;
-  });
-
   $('.edit-blog-save').click(function() {
     console.log('saving an updated blog');
     buildUpdatedBlog();
@@ -352,21 +417,9 @@ $(document).ready(function(){
     });
   });
 
-  $('.show-post-toggle').click(function() {
-    var show = {
-      id : $(this).attr('data-id'),
-      showpost : $(this).attr('data-switchto')
-    }
-    console.log('toggle post to ' + show.showpost);
-    if($(this).attr('data-switchto') == 'n') {
-      $(this).attr('data-switchto','y');
-      $(this).html('<i class="fad fa-toggle-off fa-lg"></i>');
-      console.log("toggled off");
-    } else {
-      $(this).attr('data-switchto','n');
-      $(this).html('<i class="fad fa-toggle-on fa-lg"></i>');
-      console.log("toggled on");
-    }
-    toggleShowPost(show);
+  $('.blog-search-button').click(function() {
+    var searchtext = $('#blog-search-input').val();
+    console.log('searching for: ' + searchtext);
+    sendBlogSearch(searchtext);
   });
 });
