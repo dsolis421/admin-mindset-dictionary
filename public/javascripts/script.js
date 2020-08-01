@@ -386,6 +386,7 @@ $(document).ready(function(){
     $('.new-blog-form').append('<div class="form-textarea-input">\
       <input id="new-blog-subheader" type="text" name="new-blog-subheader" placeholder="Subsection Header"></input><br>\
       <input id="new-blog-subimage" type="text" name="new-blog-subimage" placeholder="Subsection Image Link"></input><br>\
+      <input id="new-blog-subimagecaption" type="text" name="new-blog-subimagecaption" placeholder="Subsection Image Caption"></input><br>\
       <textarea id="new-blog-subtext" type="text" name="new-blog-subtext" placeholder="Subsection Text"></textarea><br>\
       <input id="new-blog-suborder" type="number" name="new-blog-suborder" placeholder="#"></input><br><br>\
       </div>')
