@@ -392,6 +392,17 @@ $(document).ready(function(){
       </div>')
   });
 
+  $('.edit-blog-addsection').click(function() {
+    console.log('adding edit blog subsection');
+    $('.edit-blog-form').append('<div class="form-textarea-input">\
+      <input id="edit-blog-subheader" type="text" name="edit-blog-subheader" placeholder="Subsection Header"></input><br>\
+      <input id="edit-blog-subimage" type="text" name="edit-blog-subimage" placeholder="Subsection Image Link"></input><br>\
+      <input id="edit-blog-subimagecaption" type="text" name="edit-blog-subimagecaption" placeholder="Subsection Image Caption"></input><br>\
+      <textarea id="edit-blog-subtext" type="text" name="edit-blog-subtext" placeholder="Subsection Text"></textarea><br>\
+      <input id="edit-blog-suborder" type="number" name="edit-blog-suborder" placeholder="#"></input><br><br>\
+      </div>')
+  });
+
   $('.edit-blog-save').click(function() {
     console.log('saving an updated blog');
     buildUpdatedBlog();
