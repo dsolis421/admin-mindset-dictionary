@@ -184,6 +184,10 @@ li {
   width: auto;
 }
 
+.blog-search-container .form-text-input {
+  width: 80%;
+}
+
 .blog-search-container .form-text-input input {
   border-right: none;
   border-radius: 10px 0px 0px 10px;
@@ -471,4 +475,16 @@ span.blog-search-button {
   .mindset-photo-definition {
     width: 90%;
   }
+
+  .form-text-input,
+  .form-textarea-input {
+    margin: 0 auto;
+    width: 90%;
+  }
+
+  .new-term-submit,
+  .new-term-cancel {
+    width: 70%;
+  }
+
 }
