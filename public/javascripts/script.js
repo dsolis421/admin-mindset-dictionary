@@ -44,7 +44,11 @@ function setBlogHandlers() {
 }
 
 function expandNewTermForm() {
-  $('.new-term-container').animate({height: "400px"},"slow","swing");
+  if ($(window).width() < 1200) {
+    $('.new-term-container').animate({height: "875px"},"slow","swing");
+  } else {
+    $('.new-term-container').animate({height: "400px"},"slow","swing");
+  }
 }
 
 function closeNewTermForm() {
